@@ -1,0 +1,15 @@
+#coins {
+    max-width: 650px;
+    margin: auto;
+}
+.coin {
+    background-color: powderblue;
+    width: 100%;
+    border: 1px solid black;  
+    padding: 3px;
+    margin-bottom: 3px;  
+}
+.price {
+    float: right;
+    width: 70px;
+}
