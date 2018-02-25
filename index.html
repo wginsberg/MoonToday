@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<style>
+    #coins {
+        max-width: 650px;
+        margin: auto;
+    }
+    .coin {
+        background-color: powderblue;
+        width: 100%;
+        border: 1px solid black;  
+        padding: 3px;
+        margin-bottom: 3px;  
+    }
+    .price {
+        float: right;
+    }
+</style>    
+<html>
+    <body>
+        <div id="coins"></div>
+    </body>    
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var coin_list = ["BTCCAD", "ETHCAD", "LTCCAD"]
+            $("#coins").append(
+                    coin_list.map((coin) =>
+                        `<div class="coin" id="${coin}">
+                            <span>${coin}</span>
+                            <span class="price">-</span>
+                         </div>`
+                        )
+                    )
+          
+            var get_price = (coin) => {
+ 
+                xhr = new XMLHttpRequest();
+                
+                xhr.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var json = JSON.parse(this.responseText)
+                        $(`#${coin} > .price`).text(json[0]["ticker"]["ask"])
+                        console.log(json["ask"])
+                    }
+                }
+
+                xhr.open("GET",
+                         `https://api.nexchange.io/en/api/v1/price/${coin}/latest/`);
+                xhr.send();
+            }
+
+            coin_list.map(get_price)
+        })
+    </script>
+<html>
