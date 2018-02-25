@@ -14,6 +14,7 @@
     }
     .price {
         float: right;
+        width: 70px;
     }
 </style>    
 <html>
@@ -40,7 +41,8 @@
                 xhr.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         var json = JSON.parse(this.responseText)
-                        $(`#${coin} > .price`).text(json[0]["ticker"]["ask"])
+                        var price = Number(json[0]["ticker"]["ask"]).toFixed(2)
+                        $(`#${coin} > .price`).text(`$${price}`)
                         console.log(json["ask"])
                     }
                 }
