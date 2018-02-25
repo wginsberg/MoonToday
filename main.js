@@ -1,9 +1,19 @@
+var updateTotal = () => {
+    var total_value = $.map($('.coin > .value'), coin => coin.innerText.slice(1))
+                .map(Number)
+                .reduce((a,b) => a+b, 0)
+                .toFixed(2)
+    var total = $("tfoot > tr > .value").text(`$${total_value}`)
+}
+
 var amountChange = e => {
         var coin = e.parentElement.parentElement.id
-        var total = $(`#${coin} > .total`)
+        var value = $(`#${coin} > .value`)
         var unit_price = $(`#${coin} > .price`)[0].innerText.slice(1)
         var amount = e.valueAsNumber
-        total.text(`$${(unit_price * amount).toFixed(2)}`)
+        value.text(`$${(unit_price * amount).toFixed(2)}`)
+
+        updateTotal()
     }
 
 var amountInput = '<input type="number" class="form-control amount" value="1.0" step="0.1" min="0" oninput="amountChange(this)">'
@@ -15,7 +25,9 @@ var get_price = (coin) => {
             var json = JSON.parse(this.responseText)
             var price = Number(json[0]["ticker"]["ask"]).toFixed(2)
             $(`#${coin} > .price`).text(`$${price}`)
-            $(`#${coin} > .total`).text(`$${price}`)
+            $(`#${coin} > .value`).text(`$${price}`)
+
+            updateTotal()
         }
     }
     xhr.open("GET",
@@ -34,7 +46,7 @@ var main = function () {
                     <td>${coin}</td>
                     <td>${amountInput}</td>
                     <td class="price">-</td>
-                    <td class="total">-</td>
+                    <td class="value">-</td>
                  </tr>`
                 )
             )
