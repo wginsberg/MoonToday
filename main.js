@@ -13,10 +13,14 @@ var amountChange = e => {
         var amount = e.valueAsNumber
         value.text(`$${(unit_price * amount).toFixed(2)}`)
 
-        updateTotal()
-    }
+        dict[coin.slice(0,-3)] = parseFloat((unit_price * amount).toFixed(2))
 
-var amountInput = '<input type="number" class="form-control amount" value="1.0" step="0.1" min="0" oninput="amountChange(this)">'
+        updateTotal()
+        doughnutChart()
+}
+
+var amountInput = '<input type="number" class="form-control amount" value="0.0" step="0.1" min="0" oninput="amountChange(this)">'
+var dict = []
 
 var get_price = (coin) => {
     xhr = new XMLHttpRequest();
@@ -53,6 +57,37 @@ var main = function () {
 
     // Hit nexchange API for prices
     coin_list.map(get_price)
+}
+
+var doughnutChart = function () {
+    var dataPoints = []
+    for (var key in dict) {
+        if (dict.hasOwnProperty(key)) {
+            console.log(key, dict[key]);
+            dataPoints.push({
+                label : key,
+                y : dict[key]
+            })
+        }
+    }
+    console.log(dataPoints)
+    var chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: true,
+      title:{
+        text: "Total Poorfolio",
+        horizontalAlign: "left"
+      },
+      data: [{
+        type: "doughnut",
+        startAngle: 60,
+        //innerRadius: 60,
+        indexLabelFontSize: 17,
+        indexLabel: "{label} (${y}) - #percent%",
+        toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+        dataPoints: dataPoints
+      }]
+    });
+    chart.render();
 }
 
 $(document).ready(main)
