@@ -1,33 +1,63 @@
-<!DOCTYPE html>
-<meta charset="utf-8"/>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">    
-<html>
-    <body>
-        <div id="cointable" class="table-responsive">
-            <table class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                        <th>Coin</th>
-                        <th>Amount</th>
-                        <th>Unit Price ($)</th>
-                        <th>Value ($)</th>
-                    </tr>
-                </thead>
-                <tbody id="coins"></tbody>
-                <tfoot>
-                    <tr>
-                        <th>Total</th>
-                        <th></th>
-                        <th></th>
-                        <th class="value">-</th>
-                    </tr>
-                </tfoot>
-        </table>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Moon Today</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Moon Today</a>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="#">Add to Wallets</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    (dummy)
+                </a>
+              </li>
+              <li class="nav-item">
+                <a id="wallets" class="nav-link" href="#" onclick="navigate('wallets')">
+                    <i class="fas fa-list"></i>
+                    Wallets
+                </a>
+              </li>
+              <li class="nav-item">
+                <a id="doughnutChart" class="nav-link" href="#" onclick="navigate('doughnutChart')">
+                  <i class="fas fa-chart-pie"></i>
+                  Summary
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        </main>
+      </div>
     </div>
-    </body>
+
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="main.js"></script>
-    <div id="chartContainer" style="height: 500; width: 100%;"></div>
+    <script type="text/javascript" src="wallets.js"></script>
+    <script type="text/javascript" src="doughnutChart.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<html>
+
+  </body>
+</html>

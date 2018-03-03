@@ -1,93 +1,29 @@
-var updateTotal = () => {
-    var total_value = $.map($('.coin > .value'), coin => coin.innerText.slice(1))
-                .map(Number)
-                .reduce((a,b) => a+b, 0)
-                .toFixed(2)
-    var total = $("tfoot > tr > .value").text(`$${total_value}`)
+var ALL_COINS = ["BTCCAD", "ETHCAD", "LTCCAD"]
+
+var state = {
+    currentPage: "wallets",
+    wallets: [],
 }
 
-var amountChange = e => {
-        var coin = e.parentElement.parentElement.id
-        var value = $(`#${coin} > .value`)
-        var unit_price = $(`#${coin} > .price`)[0].innerText.slice(1)
-        var amount = e.valueAsNumber
-        value.text(`$${(unit_price * amount).toFixed(2)}`)
+var navigate = (page) => {
 
-        dict[coin.slice(0,-3)] = parseFloat((unit_price * amount).toFixed(2))
-
-        updateTotal()
-        doughnutChart()
-}
-
-var amountInput = '<input type="number" class="form-control amount" value="0.0" step="0.1" min="0" oninput="amountChange(this)">'
-var dict = []
-
-var get_price = (coin) => {
-    xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var json = JSON.parse(this.responseText)
-            var price = Number(json[0]["ticker"]["ask"]).toFixed(2)
-            $(`#${coin} > .price`).text(`$${price}`)
-            $(`#${coin} > .value`).text(`$${price}`)
-
-            updateTotal()
-        }
+    switch (page) {
+        case "doughnutChart":
+            $("main").load("doughnutChart.html", doughnutChart)
+            break;
+        case "wallets":
+            $("main").load("wallets.html", wallets)
+            break;
     }
-    xhr.open("GET",
-             `https://api.nexchange.io/en/api/v1/price/${coin}/latest/`);
-    xhr.send();
+
+    $(".nav-link").removeClass("active")
+    $(`#${page}`).addClass("active")
+
+    state.currentPage = page
 }
 
-var main = function () {
-
-    var coin_list = ["BTCCAD", "ETHCAD", "LTCCAD"]
-
-    // Add a row to table for each coin
-    $("#coins").append(
-            coin_list.map((coin) =>
-                `<tr class="coin" id="${coin}">
-                    <td>${coin}</td>
-                    <td>${amountInput}</td>
-                    <td class="price">-</td>
-                    <td class="value">-</td>
-                 </tr>`
-                )
-            )
-
-    // Hit nexchange API for prices
-    coin_list.map(get_price)
-}
-
-var doughnutChart = function () {
-    var dataPoints = []
-    for (var key in dict) {
-        if (dict.hasOwnProperty(key)) {
-            console.log(key, dict[key]);
-            dataPoints.push({
-                label : key,
-                y : dict[key]
-            })
-        }
-    }
-    console.log(dataPoints)
-    var chart = new CanvasJS.Chart("chartContainer", {
-      animationEnabled: true,
-      title:{
-        text: "Total Poorfolio",
-        horizontalAlign: "left"
-      },
-      data: [{
-        type: "doughnut",
-        startAngle: 60,
-        //innerRadius: 60,
-        indexLabelFontSize: 17,
-        indexLabel: "{label} (${y}) - #percent%",
-        toolTipContent: "<b>{label}:</b> {y} (#percent%)",
-        dataPoints: dataPoints
-      }]
-    });
-    chart.render();
+var main = () => {
+    navigate("wallets")
 }
 
 $(document).ready(main)
