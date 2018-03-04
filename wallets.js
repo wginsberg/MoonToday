@@ -1,35 +1,38 @@
 var wallets = function () {
 
-    // Add a row to table for each coin
-    $("#coins").append(
-            ALL_COINS.map((coin) =>
-                `<tr class="coin" id="${coin}">
-                    <td>${coin}</td>
-                    <td>${amountInput(coin)}</td>
-                    <td class="price">-</td>
-                    <td class="value">-</td>
-                 </tr>`
-                )
-            )
-
-    // Add each wallet to the table
-    if (state.wallets.length) {
-        state.wallets.map(render)
-        updateTotal()
+    if (!state.wallets.length) {
+        DEFAULT_PAIRS.map(get_price)
     } else {
-        ALL_COINS.map(get_price)
+        state.wallets.map(addRow)
+        updateTotal()
     }
 }
 
-var amountInput = function(coin){
-    var _state = state.wallets.filter(({name, amount, price, value}) => name == coin)
-    var value = _state.length ? _state[0].amount : 1.0
-    return `<input type="number" class="form-control amount" value="${value}" step="0.1" min="0" oninput="amountChange(this)">`
+var addToWallet = (coin) => {
+    var name = $("#search")[0].value
+
+    // Exists in our list of pairs and is not already in wallets
+    var valid = state.pairs.indexOf(name) != -1 && 
+        state.wallets.filter((wallet) => wallet.name == name).length == 0
+
+    if (valid) {
+        get_price(name)
+        state.pairs.pop(state.pairs.indexOf(name))
+    }
 }
 
-var render = ({name, amount, price, value}) => {
-    $(`#${name} > .price`).text(`$${price}`)
-    $(`#${name} > .value`).text(`$${value}`)    
+var addRow = ({name, amount, price, value}) => {
+    $("#coins").append(`
+        <tr class="coin" id="${name}">
+            <td>${name}</td>
+            <td>${amountInput(amount)}</td>
+            <td class="price">${price}</td>
+            <td class="value">${value}</td>
+         </tr>`)
+}
+
+var amountInput = (amount) => {
+    return `<input type="number" class="form-control amount" value="${amount}" step="0.1" min="0" oninput="amountChange(this)">`
 }
 
 var get_price = (coin) => {
@@ -41,13 +44,13 @@ var get_price = (coin) => {
 
             var _state = {
                 name: coin,
-                amount: 1.0,
+                amount: "1.0",
                 price: price,
                 value: price,
             }
             state.wallets.push(_state)
 
-            render(_state)
+            addRow(_state)
 
             updateTotal()
         }
