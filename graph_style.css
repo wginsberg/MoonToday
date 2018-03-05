@@ -35,21 +35,18 @@
 
 #price_chart {
   height: 400px; 
-  width: 50%; 
   margin: auto;
   display: none; 
 }
 
 #market_data {
-  height: 190px; 
-  width: 650px; 
+  height: 190px;
   margin: auto;
   display: block;
 }
 
 #holding {
   height: 200px; 
-  width: 650px; 
   margin: auto;
   display: none;
 }
@@ -64,7 +61,6 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    left: 33%;
     text-align: center;
 }
 
@@ -86,7 +82,6 @@ body{
   background-color: #99ccff;
   margin: 0;
   padding: 5px;
-  width: 650px;
   color: #ffffff;
   text-shadow: 1px 1px #000;
 }
@@ -94,7 +89,6 @@ body{
 table {  
     color: #333;
     font-family: Helvetica, Arial, sans-serif;
-    width: 640px; 
     border-collapse: 
     collapse; border-spacing: 0; 
 }
