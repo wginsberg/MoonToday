@@ -1,0 +1,117 @@
+.loader {
+  border-radius: 50%;
+  border: 10px solid #f3f3f3;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  width: 150px;
+  height: 150px;
+  margin: auto;
+}
+
+#loader_chart {
+  background: url('img/rollercoaster.gif') no-repeat center center;;
+  display: none;
+}
+
+#loader_market {
+  background: url('img/ethereum.gif') no-repeat center center;;
+  display: none;
+}
+
+#loader_holding {
+  background: url('img/rollercoaster2.gif') no-repeat center center;;
+  display: none;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#price_chart {
+  height: 400px; 
+  width: 50%; 
+  margin: auto;
+  display: none; 
+}
+
+#market_data {
+  height: 190px; 
+  width: 650px; 
+  margin: auto;
+  display: block;
+}
+
+#holding {
+  height: 200px; 
+  width: 650px; 
+  margin: auto;
+  display: none;
+}
+
+.button {
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    left: 33%;
+    text-align: center;
+}
+
+.chart_button {
+  background-color: #008CBA;
+}
+
+.back_button {
+  background-color: #666699;
+}
+
+body{
+  background-image: url('img/moon.gif');
+  background-size: cover;
+
+}
+
+.title {
+  background-color: #99ccff;
+  margin: 0;
+  padding: 5px;
+  width: 650px;
+  color: #ffffff;
+  text-shadow: 1px 1px #000;
+}
+
+table {  
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 640px; 
+    border-collapse: 
+    collapse; border-spacing: 0; 
+}
+
+td, th {  
+    border: 1px solid #ddd;
+    height: 30px; 
+    padding: 8px;
+    text-align: center;
+}
+
+th {  
+    background: #99ccff; 
+    font-weight: bold;
+}
+
+td {  
+    background: #e6f5ff;
+    text-align: center;
+}

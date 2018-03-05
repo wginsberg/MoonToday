@@ -24,7 +24,7 @@ var addToWallet = (coin) => {
 var addRow = ({name, amount, price, value}) => {
     $("#coins").append(`
         <tr class="coin" id="${name}">
-            <td>${name}</td>
+            <td><a href="#" onclick="state.currentPair=event.target.text; navigate('insights')">${name}</a></td>
             <td>${amountInput(amount)}</td>
             <td class="price">${price}</td>
             <td class="value">${value}</td>

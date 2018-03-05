@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="graph_style.css">   
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
   </head>
 
@@ -30,14 +31,20 @@
               </li>
               <li class="nav-item">
                 <a id="wallets" class="nav-link" href="#" onclick="navigate('wallets')">
-                    <i class="fas fa-list"></i>
+                    <i class="fas fa-list fa-sm"></i>
                     Wallets
                 </a>
               </li>
               <li class="nav-item">
                 <a id="doughnutChart" class="nav-link" href="#" onclick="navigate('doughnutChart')">
-                  <i class="fas fa-chart-pie"></i>
+                  <i class="fas fa-chart-pie fa-sm"></i>
                   Summary
+                </a>
+              </li>
+              <li class="nav-item">
+                <a id="insights" class="nav-link" href="#" onclick="navigate('insights')">
+                  <i class="fas fa-chart-line fa-sm"></i>
+                  Insights
                 </a>
               </li>
             </ul>
@@ -45,7 +52,6 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         </main>
       </div>
     </div>
@@ -53,6 +59,8 @@
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="wallets.js"></script>
+    <script type="text/javascript" src="insights.js"></script>
+    <script type="text/javascript" src="market.js"></script>
     <script type="text/javascript" src="doughnutChart.js"></script>
     <script type="text/javascript" src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.min.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>

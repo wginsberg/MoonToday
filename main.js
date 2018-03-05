@@ -2,8 +2,9 @@ var DEFAULT_PAIRS = ["BTCCAD", "ETHCAD", "LTCCAD"]
 
 var state = {
     currentPage: "wallets",
+    currentPair: "",
     wallets: [],
-    pairs: [],
+    pairs: []
 }
 
 var substringMatcher = function(strs) {
@@ -66,6 +67,9 @@ var navigate = (page) => {
         case "wallets":
             $("main").load("wallets.html", wallets)
             break;
+        case "insights":
+            $("main").load("insights.html", () => insights(24))
+            break;
     }
 
     $(".nav-link").removeClass("active")
@@ -77,6 +81,37 @@ var navigate = (page) => {
 var main = () => {
     navigate("wallets")
     get_pairs()
+}
+
+var doughnutChart = function () {
+    var dataPoints = []
+    for (var key in dict) {
+        if (dict.hasOwnProperty(key)) {
+            console.log(key, dict[key]);
+            dataPoints.push({
+                label : key,
+                y : dict[key]
+            })
+        }
+    }
+    console.log(dataPoints)
+    var chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: true,
+      title:{
+        text: "Total Poorfolio",
+        horizontalAlign: "left"
+      },
+      data: [{
+        type: "doughnut",
+        startAngle: 60,
+        //innerRadius: 60,
+        indexLabelFontSize: 17,
+        indexLabel: "{label} (${y}) - #percent%",
+        toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+        dataPoints: dataPoints
+      }]
+    });
+    chart.render();
 }
 
 $(document).ready(main)
