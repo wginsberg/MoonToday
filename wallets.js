@@ -2,9 +2,6 @@ var wallets = function () {
 
     if (!state.wallets.length) {
         DEFAULT_PAIRS.map(get_price)
-    } else {
-        state.wallets.map(addRow)
-        updateTotal()
     }
 }
 
