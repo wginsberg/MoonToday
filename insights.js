@@ -1,4 +1,6 @@
 var insights = (hours) => {
+    hours = hours || 24
+    console.log(hours)
     draw_chart(hours)
     get_market_data(hours)
     get_holding_value(hours)

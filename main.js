@@ -60,20 +60,17 @@ var get_pairs = () => {
 
 var navigate = (page) => {
 
-    switch (page) {
-        case "doughnutChart":
-            $("main").load("doughnutChart.html", doughnutChart)
-            break;
-        case "wallets":
-            $("main").load("wallets.html", wallets)
-            break;
-        case "insights":
-            $("main").load("insights.html", () => insights(24))
-            break;
-    }
+    // Change view
+    $(`#${state.currentPage}View`).hide()
+    $(`#${page}View`).show()
+    window[page]()
+
+    // Update nav
 
     $(".nav-link").removeClass("active")
     $(`#${page}`).addClass("active")
+
+    // Update state
 
     state.currentPage = page
 }
