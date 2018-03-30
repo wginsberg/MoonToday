@@ -38,3 +38,6 @@ Other revelant data such as Market High, Market Low, Trend, % Change, and curren
 
 ### Search Bar
 The search bar is persistent across all three views and allows the user to add their other crypto holdings.
+
+### Session Management
+-insert pic
