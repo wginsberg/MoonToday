@@ -8,7 +8,7 @@ MoonToday is an online cryptocurrency profolio tracker app that provide trading 
 * Kang Jie Yuan - Github username: kjackyuan - UTORID: yuankang
 * Hung Yuan Chen - Github username: harveyc95 - UTORID: chenhun4
 
-#### Note: Please init the sqlite3 database once using `init.js` and connect using localhost:3000
+#### Note: Please init the sqlite3 database once using `init.js` start the server using `server.js` connect using localhost:3000
 
 Main view upon startup: 
 ![alt text](https://github.com/csc309-18s/assignment-2-senpai-please-notice-me/blob/master/SolutionsIMG/Home.png)
