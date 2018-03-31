@@ -30,8 +30,9 @@ var substringMatcher = function(strs) {
     // Allow the user to add any custom string not in our list
     if (!matches.filter((match) => match.display == q.toUpperCase()).length) {
         var match = {
-            display: q,
-            suggestion: `Add <strong>'${q}'</strong> to wallet`
+            display: q.toUpperCase(),
+            suggestion: `Add <strong>'${q}'</strong> to wallet`,
+            custom: true
         }
         // By default the typeahead shows only 5 items
         matches.splice(4, 0, match)
@@ -42,7 +43,7 @@ var substringMatcher = function(strs) {
 };
 
 var typeaheadSuggestion = ({suggestion}) => {
-    return `<div class="tt-suggestion tt-selectable">
+    return `<div class="tt-suggestion tt-selectable ">
                 ${suggestion}
             </div>`
 }

@@ -16,8 +16,8 @@ var getWallets = (req, res) => {
 };
 
 var addWallet = (req, res) => {
-    var query = "INSERT INTO wallet VALUES (?, 0.0, ?)"
-    var params = [req.params.name, req.params.userid]
+    var query = "INSERT OR IGNORE INTO wallet (userid, pair, custom) VALUES (?, ?, ?)"
+    var params = [req.params.userid, req.params.name, Boolean(req.body.length)]
     var callback = (err) => res.sendStatus(err ? 500 : 200)
     db.run(query, params, callback)
 }
@@ -25,6 +25,15 @@ var addWallet = (req, res) => {
 var updateWallet = (req, res) => {
     var query = "UPDATE wallet SET amount = ? WHERE pair == ? AND userid == ?"
     var params = [req.params.amount, req.params.name, req.params.userid]
+    var callback = (err) => res.sendStatus(err ? 500 : 200)
+    db.run(query, params, callback)
+}
+
+// TODO track the price history of custom pairs
+var updatePair = (req, res) => {
+    console.log(req.params)
+    var query = "UPDATE wallet SET price = ? WHERE pair == ? and userid == ?"
+    var params = [req.body, req.params.name, req.params.userid]
     var callback = (err) => res.sendStatus(err ? 500 : 200)
     db.run(query, params, callback)
 }
@@ -38,6 +47,8 @@ app.get('/wallets/:userid', getWallets)
 app.put('/wallets/:userid/:name', addWallet)
 // `curl -X PUT localhost:3000/wallets/DOGEBTC/123`
 app.put('/wallets/:userid/:name/:amount', updateWallet)
+
+app.put('/wallets/:userid/:name/price', updatePair)
 
 // Supply javascript to the client. Can this be cleaner?
 app.get('/main.js', (req, res) => res.sendFile(__dirname + '/main.js'))
