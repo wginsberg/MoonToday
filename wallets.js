@@ -1,8 +1,41 @@
-var wallets = function () {
-
-    if (!state.wallets.length) {
-        DEFAULT_PAIRS.map(get_price)
+var not_in_wallet = (coin) => {
+    for (item of state.wallets){
+        if (coin == item['name'])
+            return false
     }
+    return true
+}
+
+var wallets = function () {
+    xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var json = JSON.parse(this.responseText)
+            for(item of json){
+                var coin = item['pair']
+                var amount = item['amount']
+
+                if (not_in_wallet(coin)){
+                    get_price(coin, amount)
+                    state.pairs.pop(state.pairs.indexOf(coin))
+                }
+            }
+        }
+    }
+
+    xhr.open("GET",
+             `http://localhost:3000/wallets/${getCookie()}`);
+    xhr.send();
+
+    console.log(state)
+}
+
+var add_coin_to_server = (coin) => {
+    xhr = new XMLHttpRequest();
+    console.log(`http://localhost:3000/wallets/${getCookie()}/${coin}`)
+    xhr.open("PUT",
+             `http://localhost:3000/wallets/${getCookie()}/${coin}`);
+    xhr.send();
 }
 
 var addToWallet = (coin) => {
@@ -13,7 +46,8 @@ var addToWallet = (coin) => {
         state.wallets.filter((wallet) => wallet.name == name).length == 0
 
     if (valid) {
-        get_price(name)
+        get_price(name, 0.0)
+        add_coin_to_server(name)
         state.pairs.pop(state.pairs.indexOf(name))
     }
 }
@@ -32,7 +66,7 @@ var amountInput = (amount) => {
     return `<input type="number" class="form-control amount" value="${amount}" step="0.1" min="0" oninput="amountChange(this)">`
 }
 
-var get_price = (coin) => {
+var get_price = (coin, coin_amount) => {
     xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -41,9 +75,9 @@ var get_price = (coin) => {
 
             var _state = {
                 name: coin,
-                amount: "1.0",
+                amount: coin_amount,
                 price: price,
-                value: price,
+                value: price*coin_amount,
             }
             state.wallets.push(_state)
 
@@ -65,6 +99,14 @@ var updateTotal = () => {
     var total = $("tfoot > tr > .value").text(`$${total_value}`)
 }
 
+var update_coin_in_server = (coin, amount) => {
+    xhr = new XMLHttpRequest();
+    console.log(`http://localhost:3000/wallets/${getCookie()}/${coin}/${amount}`)
+    xhr.open("PUT",
+             `http://localhost:3000/wallets/${getCookie()}/${coin}/${amount}`);
+    xhr.send();
+}
+
 var amountChange = e => {
         
         // Get element
@@ -79,4 +121,5 @@ var amountChange = e => {
         $(`#${coin} > .value`).text(`$${_state.value}`)
 
         updateTotal()
+        update_coin_in_server(coin, _state.amount)
 }

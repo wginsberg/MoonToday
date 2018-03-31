@@ -1,5 +1,3 @@
-var DEFAULT_PAIRS = ["BTCCAD", "ETHCAD", "LTCCAD"]
-
 var state = {
     currentPage: "wallets",
     currentPair: "",
@@ -48,7 +46,6 @@ var get_pairs = () => {
             var json = JSON.parse(this.responseText)
             _state = json
                 .map((json) => json.name)
-                .filter((name) => DEFAULT_PAIRS.indexOf(name) == -1)
             state.pairs = _state
 
             autocompleteInit()
@@ -78,6 +75,7 @@ var navigate = (page) => {
 var main = () => {
     navigate("wallets")
     get_pairs()
+    setCookieField()
 }
 
 var doughnutChart = function () {

@@ -14,9 +14,13 @@
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#" onclick="navigate('wallets')">Moon Today</a>
-      <span style="width: 100%">
+      <span style="width: 30%">
           <input id="search" type="search" placeholder="Search" aria-label="Search">
         </span>
+      <span style="width: 30%">
+          <input id="userID" type="userID" placeholder="userID" aria-label="userID">
+          <button onclick="setCookie();window.location.reload()">set userID</button>
+      </span>
     </nav>
 
     <div class="container-fluid">
@@ -157,6 +161,7 @@
     </div>
 
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="cookie.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="wallets.js"></script>
     <script type="text/javascript" src="insights.js"></script>
