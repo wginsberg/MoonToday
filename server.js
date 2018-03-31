@@ -19,8 +19,6 @@ var addWallet = (req, res) => {
     var query = "INSERT INTO wallet VALUES (?, 0.0, ?)"
     var params = [req.params.name, req.params.userid]
     var callback = (err) => res.sendStatus(err ? 500 : 200)
-    console.log(query)
-    console.log(params)
     db.run(query, params, callback)
 }
 
