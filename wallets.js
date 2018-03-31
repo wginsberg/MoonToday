@@ -1,11 +1,3 @@
-var not_in_wallet = (coin) => {
-    for (item of state.wallets){
-        if (coin == item['name'])
-            return false
-    }
-    return true
-}
-
 var wallets = function () {
     xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -15,12 +7,9 @@ var wallets = function () {
                 var coin = item['pair']
                 var amount = item['amount']
                 var custom = item['custom']
-
-                if (not_in_wallet(coin)){
-                    addRow(item)
-                    state.wallets.push(item)
-                    state.pairs.pop(state.pairs.indexOf(coin))
-                }
+                addRow(item)
+                state.wallets.push(item)
+                state.pairs.pop(state.pairs.indexOf(coin))
             }
         }
     }
@@ -48,7 +37,7 @@ var addToWallet = (_, {custom}) => {
             addRow({
                 pair: pair,
                 amount: "0.0",
-                price: "0.0",
+                price: "0.00",
                 value: "0.0",
                 custom: true
             })
@@ -111,16 +100,16 @@ var updateTotal = () => {
     var total = $("tfoot > tr > .value").text(`$${total_value}`)
 }
 
-var update_coin_in_server = (coin, {amount, price}) => {
+var updateAmountServer = (coin, amount) => {
     xhr = new XMLHttpRequest();
-    xhr.open("PUT", `http://localhost:3000/wallets/${getCookie()}/${coin}/`);
-    let body = {}
-    if (amount) {
-        body.amount = amount
-    } else if (price) {
-        body.price = price
-    }
-    xhr.send(body);
+    xhr.open("PUT", `http://localhost:3000/wallets/${getCookie()}/${coin}/amount/`);
+    xhr.send(amount);
+}
+
+var updatePriceServer = (coin, price) => {
+    xhr = new XMLHttpRequest();
+    xhr.open("PUT", `http://localhost:3000/wallets/${getCookie()}/${coin}/price/`);
+    xhr.send(price);
 }
 
 var amountChange = e => {
@@ -137,7 +126,7 @@ var amountChange = e => {
         $(`#${coin} > .value`).text(`$${_state.value}`)
 
         updateTotal()
-        update_coin_in_server(coin, {amount: _state.amount})
+        updateAmountServer(coin, _state.amount)
 }
 
 var priceChange = e => {
@@ -154,5 +143,5 @@ var priceChange = e => {
         $(`#${coin} > .value`).text(`$${_state.value}`)
 
         updateTotal()
-        update_coin_in_server(coin, _state.price)
+        updatePriceServer(coin, _state.price)
 }
