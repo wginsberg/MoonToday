@@ -67,10 +67,11 @@ var addRow = ({pair, amount, price, value, custom}) => {
     $("#coins").append(`
         <tr class="coin" id="${pair}">
             <td><a href="#" onclick="state.currentPair=event.target.text; navigate('insights')">${pair}</a></td>
+            <td><button onclick="remove_coin('${pair}')"><i class="fa fa-trash"></i></button></td>
             <td>${amountInput(amount)}</td>
             <td class="price">${custom ? priceInput(price) : price}</td>
             <td class="value">${value}</td>
-         </tr>`)
+        </tr>`)
 }
 
 var get_price = (coin, coin_amount) => {
@@ -119,7 +120,7 @@ var updatePriceServer = (coin, price) => {
 }
 
 var amountChange = e => {
-        
+
         // Get element
         var coin = e.parentElement.parentElement.id
 
@@ -136,7 +137,7 @@ var amountChange = e => {
 }
 
 var priceChange = e => {
-        
+
         // Get element
         var coin = e.parentElement.parentElement.id
 
@@ -150,4 +151,25 @@ var priceChange = e => {
 
         updateTotal()
         updatePriceServer(coin, _state.price)
+}
+
+var remove_coin = (pair) => {
+    // Remove from database
+    xhr = new XMLHttpRequest();
+    console.log(`http://localhost:3000/wallets/${getCookie()}/${pair}`)
+    xhr.open("DELETE",
+             `http://localhost:3000/wallets/${getCookie()}/${pair}`);
+    xhr.send();
+
+    // remove from html
+    $(`#${pair}`).remove()
+
+    // remove from state.wallets
+    for (var i=0; i<state.wallets.length; i++){
+        if (state.wallets[i].pair == pair){
+            console.log(`removed ${state.wallets[i].pair}`)
+            state.wallets.splice(i, 1)
+            break
+        }
+    }
 }
