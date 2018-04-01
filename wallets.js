@@ -67,10 +67,10 @@ var addRow = ({pair, amount, price, value, custom}) => {
     $("#coins").append(`
         <tr class="coin" id="${pair}">
             <td><a href="#" onclick="state.currentPair=event.target.text; navigate('insights')">${pair}</a></td>
+            <td><button onclick="remove_coin('${pair}')"><i class="fa fa-trash"></i></button></td>
             <td>${amountInput(amount)}</td>
             <td class="price">${custom ? priceInput(price) : price}</td>
             <td class="value">${value}</td>
-            <td><button onclick="remove_coin('${pair}')"><i class="fa fa-times-circle"></i></button></td>
         </tr>`)
 }
 
