@@ -29,11 +29,11 @@ The project will be deployed on a laptop for the demo.
 
 
 Main view upon startup: 
-![alt text](https://github.com/csc309-18s/assignment-2-senpai-please-notice-me/blob/master/SolutionsIMG/Home.png)
+![alt text](https://github.com/csc309-18s/assignment-3-senpai-please-notice-me/blob/master/screenshots/startup.png)
 
 ## Functionalities
 ### Wallet
-![alt text](https://github.com/csc309-18s/assignment-2-senpai-please-notice-me/blob/master/SolutionsIMG/Wallet.png)
+![alt text](https://github.com/csc309-18s/assignment-3-senpai-please-notice-me/blob/master/screenshots/wallet.png)
 
 User input the amount of different cryptocurrencies that he/she owns.
 To change the amount of crypto owned, the user can type in a new number or just the up and down toggle.
@@ -56,7 +56,8 @@ Other revelant data such as Market High, Market Low, Trend, % Change, and curren
 
 ### Search Bar
 The search bar is persistent across all three views and allows the user to add their other crypto holdings.
+![alt text](https://github.com/csc309-18s/assignment-3-senpai-please-notice-me/blob/master/screenshots/searchbar.png)
 
 ### Session Management
 To be added:
--insert pic
+![alt text](https://github.com/csc309-18s/assignment-3-senpai-please-notice-me/blob/master/screenshots/cookie.png)
