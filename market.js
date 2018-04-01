@@ -82,7 +82,7 @@ var get_holding_value = (hours) => {
     var price_url = `https://api.nexchange.io/en/api/v1/price/${trading_pair}/history/?hours=${hours}&data_points=${data_points}&market_code=nex`
 
     var parse_holding = (data) => {
-        var quantity = this.quantity
+        var quantity = Number(this.quantity)
 
         data = data.map((item) => {
                     price = 0.5*(Number(item['ticker']['ask']) + Number(item['ticker']['bid']))

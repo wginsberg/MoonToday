@@ -22,6 +22,13 @@ var addWallet = (req, res) => {
     db.run(query, params, callback)
 }
 
+var removePair = (req, res) => {
+    var query = "DELETE FROM wallet WHERE pair == ? AND userid == ?"
+    var params = [req.params.name, req.params.userid]
+    var callback = (err) => res.sendStatus(err ? 500 : 200)
+    db.run(query, params, callback)
+}
+
 var updateWallet = (req, res) => {
     var query = "UPDATE wallet SET amount = ? WHERE pair == ? AND userid == ?"
     var params = [req.body, req.params.name, req.params.userid]
@@ -48,6 +55,7 @@ app.put('/wallets/:userid/:name', addWallet)
 
 app.put('/wallets/:userid/:name/amount', updateWallet)
 app.put('/wallets/:userid/:name/price', updatePair)
+app.delete('/wallets/:userid/:name', removePair)
 
 // Supply javascript to the client. Can this be cleaner?
 app.get('/main.js', (req, res) => res.sendFile(__dirname + '/main.js'))

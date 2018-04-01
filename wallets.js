@@ -70,7 +70,8 @@ var addRow = ({pair, amount, price, value, custom}) => {
             <td>${amountInput(amount)}</td>
             <td class="price">${custom ? priceInput(price) : price}</td>
             <td class="value">${value}</td>
-         </tr>`)
+            <td class="delete_coin"><a href="#" onclick="remove_coin('${pair}')">Delete</a></td>
+        </tr>`)
 }
 
 var get_price = (coin, coin_amount) => {
@@ -150,4 +151,25 @@ var priceChange = e => {
 
         updateTotal()
         updatePriceServer(coin, _state.price)
+}
+
+var remove_coin = (pair) => {
+    // Remove from database
+    xhr = new XMLHttpRequest();
+    console.log(`http://localhost:3000/wallets/${getCookie()}/${pair}`)
+    xhr.open("DELETE",
+             `http://localhost:3000/wallets/${getCookie()}/${pair}`);
+    xhr.send();
+
+    // remove from html
+    $(`#${pair}`).remove()
+
+    // remove from state.wallets
+    for (var i=0; i<state.wallets.length; i++){
+        if (state.wallets[i].pair == pair){
+            console.log(`removed ${state.wallets[i].pair}`)
+            state.wallets.splice(i, 1)
+            break
+        }
+    }
 }
