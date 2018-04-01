@@ -70,7 +70,7 @@ var addRow = ({pair, amount, price, value, custom}) => {
             <td>${amountInput(amount)}</td>
             <td class="price">${custom ? priceInput(price) : price}</td>
             <td class="value">${value}</td>
-            <td class="delete_coin"><a href="#" onclick="remove_coin('${pair}')">Delete</a></td>
+            <td><button onclick="remove_coin('${pair}')"><i class="fa fa-times-circle"></i></button></td>
         </tr>`)
 }
 
@@ -120,7 +120,7 @@ var updatePriceServer = (coin, price) => {
 }
 
 var amountChange = e => {
-        
+
         // Get element
         var coin = e.parentElement.parentElement.id
 
@@ -137,7 +137,7 @@ var amountChange = e => {
 }
 
 var priceChange = e => {
-        
+
         // Get element
         var coin = e.parentElement.parentElement.id
 

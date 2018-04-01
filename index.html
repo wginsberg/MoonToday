@@ -2,12 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+
     <title>Moon Today</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="style.css" rel="stylesheet">
-    <link rel="stylesheet" href="graph_style.css">   
+    <link rel="stylesheet" href="graph_style.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
   </head>
 
@@ -56,7 +57,7 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-          
+
           <div id="walletsView" class="view table-responsive">
             <table class="table table-striped table-sm">
                 <thead>
@@ -65,6 +66,7 @@
                         <th>Amount</th>
                         <th>Unit Price ($)</th>
                         <th>Value ($)</th>
+                        <th>Delete </th>
                     </tr>
                 </thead>
                 <tbody id="coins"></tbody>
@@ -74,6 +76,7 @@
                         <th></th>
                         <th></th>
                         <th class="value">-</th>
+                        <th></th>
                     </tr>
                 </tfoot>
             </table>
@@ -82,7 +85,7 @@
           <div id="doughnutChartView" class="view">
             <div id="chartContainer" style="height: 500; width: 100%;"></div>
           </div>
-          
+
           <div id="insightsView" class="view container-fluid">
               <div id='time_period' class="row" style="margin-bottom: 20px; justify-content: center">
                   <button class="col-md-2 button chart_button" onclick="insights(24);">Day</button>
@@ -90,7 +93,7 @@
                   <button class="col-md-2 button chart_button" onclick="insights(24*30);">Month</button>
                   <button class="col-md-2 button chart_button" onclick="insights(24*365);">Year</button>
               </div>
-              
+
               <div class="row">
                   <div id="loader_chart" class="loader"></div>
                   <div id="price_chart" class="col-md-8 offset-md-2"></div>
