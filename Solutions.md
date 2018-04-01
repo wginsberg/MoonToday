@@ -70,3 +70,11 @@ Users: Di8D3zm and RrZ6ti4
 ![alt text](https://github.com/csc309-18s/assignment-3-senpai-please-notice-me/blob/master/screenshots/user1.png)
 ![alt text](https://github.com/csc309-18s/assignment-3-senpai-please-notice-me/blob/master/screenshots/user2.png)
 
+### RESTful-ness
+The API exposed by our server is completely RESTful. 
+We expose 3 types of API requests:
+1) Querying wallet information about a user. This is done via GET request to `/:user_id/wallets`. The response object will be a array of objects in JSON format which contains the `name`, `amount`, `price` of each coin in the wallet.
+2) Adding or Modifying `amount` or `price` data about a particular coin for a user. This is done via PUT request to `/:user_id/<coin name>`, with `amount` and `price` data being sent in the request body.
+3) Removing a coin from a user's wallet. This is done via DELETE request to `/:user_id/wallet` and the coin to delete is sent in the request body.
+
+
