@@ -13,29 +13,54 @@ var substringMatcher = function(strs) {
     matches = [];
 
     // regex used to determine if a string contains the substring `q`
-    substrRegex = new RegExp(q, 'i');
+    substrRegex = new RegExp(q, 'gi');
 
     // iterate through the pool of strings and for any string that
     // contains the substring `q`, add it to the `matches` array
     $.each(strs, function(i, str) {
       if (substrRegex.test(str)) {
-        matches.push(str);
+        match = {
+            display: str,
+            suggestion: str.replace(substrRegex, (x) => `<strong>${x}</strong>`)
+        }
+        matches.push(match);
       }
     });
+
+    // Allow the user to add any custom string not in our list
+    if (!matches.filter((match) => match.display == q.toUpperCase()).length) {
+        var match = {
+            display: q.toUpperCase(),
+            suggestion: `Add <strong>'${q}'</strong> to wallet`,
+            custom: true
+        }
+        // By default the typeahead shows only 5 items
+        matches.splice(4, 0, match)
+    }
 
     cb(matches);
   };
 };
 
+var typeaheadSuggestion = ({suggestion}) => {
+    return `<div class="tt-suggestion tt-selectable ">
+                ${suggestion}
+            </div>`
+}
+
 var autocompleteInit = () => {
     $('#search').typeahead({
       hint: true,
-      highlight: true,
+      highlight: false,
       minLength: 1
     },
     {
       name: 'states',
-      source: substringMatcher(state.pairs)
+      source: substringMatcher(state.pairs),
+      display: (data) => data.display,
+      templates: {
+        suggestion: typeaheadSuggestion
+      }
     }).on("typeahead:selected", addToWallet);
 }
 
@@ -82,14 +107,12 @@ var doughnutChart = function () {
     var dataPoints = []
     for (var key in dict) {
         if (dict.hasOwnProperty(key)) {
-            console.log(key, dict[key]);
             dataPoints.push({
                 label : key,
                 y : dict[key]
             })
         }
     }
-    console.log(dataPoints)
     var chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       title:{
