@@ -1,4 +1,8 @@
 var wallets = function () {
+    // Avoid duplicate entries on navigation
+    if (state.wallets.length) {
+        return
+    }
     xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
