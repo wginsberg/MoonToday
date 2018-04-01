@@ -7,10 +7,13 @@ var wallets = function () {
                 var coin = item['pair']
                 var amount = item['amount']
                 var custom = item['custom']
-                item['value'] = (item['amount'] * item['price']).toFixed(2)
-                addRow(item)
-                state.wallets.push(item)
-                state.pairs.pop(state.pairs.indexOf(coin))
+                if (custom) {
+                    item['value'] = (item['amount'] * item['price']).toFixed(2)
+                    addRow(item)
+                    state.wallets.push(item)
+                } else {
+                    get_price(coin, amount)
+                }
             }
             updateTotal()
         }
