@@ -16,9 +16,9 @@ var getWallets = (req, res) => {
 };
 
 var addWallet = (req, res) => {
-    var query = "INSERT OR IGNORE INTO wallet (userid, pair, custom) VALUES (?, ?, ?)"
+    var query = "INSERT INTO wallet (userid, pair, custom) VALUES (?, ?, ?)"
     var params = [req.params.userid, req.params.name, Boolean(req.body.length)]
-    var callback = (err) => res.sendStatus(err ? 500 : 200)
+    var callback = (err) => {console.log(err); res.sendStatus(err ? 500 : 200)}
     db.run(query, params, callback)
 }
 
