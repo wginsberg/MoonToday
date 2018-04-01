@@ -48,7 +48,7 @@ var addToWallet = (_, {custom}) => {
                 custom: true
             })
         } else {
-             get_price(pair, "1.0")
+             get_price(pair, "0.0")
         }
         add_coin_to_server(pair, custom)
         state.pairs.pop(state.pairs.indexOf(pair))
