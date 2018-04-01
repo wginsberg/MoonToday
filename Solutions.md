@@ -59,5 +59,8 @@ The search bar is persistent across all three views and allows the user to add t
 ![alt text](https://github.com/csc309-18s/assignment-3-senpai-please-notice-me/blob/master/screenshots/searchbar.png)
 
 ### Session Management
-To be added:
+For session management, cookies were used. 
+1) If the page is accesed without parameters and cookies are not set: a random userID will be generated. The user can bookmark the page and come back even after the browser is closed.
+2) If the page is accessed without parameters but cookies are set: then the sessino will resume to whatever the cookie was set to.
+3) If the page is accessed with parameters: the cookie will be set to the parameter and the coressponding data will be fetched.
 ![alt text](https://github.com/csc309-18s/assignment-3-senpai-please-notice-me/blob/master/screenshots/cookie.png)
