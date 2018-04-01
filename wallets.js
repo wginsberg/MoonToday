@@ -7,18 +7,17 @@ var wallets = function () {
                 var coin = item['pair']
                 var amount = item['amount']
                 var custom = item['custom']
+                item['value'] = (item['amount'] * item['price']).toFixed(2)
                 addRow(item)
                 state.wallets.push(item)
                 state.pairs.pop(state.pairs.indexOf(coin))
             }
+            updateTotal()
         }
     }
 
-    xhr.open("GET",
-             `http://localhost:3000/wallets/${getCookie()}`);
+    xhr.open("GET", `http://localhost:3000/wallets/${getCookie()}`);
     xhr.send();
-
-    console.log(state)
 }
 
 var add_coin_to_server = (coin, custom) => {
@@ -54,7 +53,7 @@ var amountInput = (amount) => {
 }
 
 var priceInput = (price) => {
-    return `<input type="number" class="form-control" value="${price}" step="0.1" min="0" oninput="priceChange(this)">`
+    return `<input type="number" class="form-control" value="${price}" step="0.01" min="0" oninput="priceChange(this)">`
 }
 
 var addRow = ({pair, amount, price, value, custom}) => {
@@ -75,7 +74,7 @@ var get_price = (coin, coin_amount) => {
             var price = Number(json[0]["ticker"]["ask"]).toFixed(2)
 
             var _state = {
-                name: coin,
+                pair: coin,
                 amount: coin_amount,
                 price: price,
                 value: price*coin_amount,
