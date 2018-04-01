@@ -38,7 +38,8 @@ Main view upon startup:
 User input the amount of different cryptocurrencies that he/she owns.
 To change the amount of crypto owned, the user can type in a new number or just the up and down toggle.
 MoonToday calculates their total value using the current market price from Nexchange.
-At the bottom of, the sum of all cryptocurrency values is displayed. 
+At the bottom of, the sum of all cryptocurrency values is displayed.
+A new feature has been added: the trash can icon can remove the corresponding row.
 
 ### Summary
 ![alt text](https://github.com/csc309-18s/assignment-2-senpai-please-notice-me/blob/master/SolutionsIMG/Summary.png)
@@ -64,4 +65,8 @@ For session management, cookies were used.
 2) If the page is accessed without parameters but cookies are set: then the sessino will resume to whatever the cookie was set to.
 3) If the page is accessed with parameters: the cookie will be set to the parameter and the coressponding data will be fetched.
 
-![alt text](https://github.com/csc309-18s/assignment-3-senpai-please-notice-me/blob/master/screenshots/cookie.png)
+Below are two users running concurrently:
+Users: Di8D3zm and RrZ6ti4
+![alt text](https://github.com/csc309-18s/assignment-3-senpai-please-notice-me/blob/master/screenshots/user1.png)
+![alt text](https://github.com/csc309-18s/assignment-3-senpai-please-notice-me/blob/master/screenshots/user2.png)
+
