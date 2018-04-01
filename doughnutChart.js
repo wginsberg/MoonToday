@@ -1,7 +1,7 @@
 var doughnutChart = function () {
-
+    console.log(state)
     var dataPoints = state.wallets.map((wallet) => ({
-        label: wallet.name, 
+        label: wallet.pair, 
         y: Number(wallet.value)
     }))
 

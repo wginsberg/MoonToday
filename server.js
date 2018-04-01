@@ -16,17 +16,31 @@ var getWallets = (req, res) => {
 };
 
 var addWallet = (req, res) => {
-    var query = "INSERT INTO wallet VALUES (?, 0.0, ?)"
+    var query = "INSERT INTO wallet (userid, pair, custom) VALUES (?, ?, ?)"
+    var params = [req.params.userid, req.params.name, Boolean(req.body.length)]
+    var callback = (err) => {console.log(err); res.sendStatus(err ? 500 : 200)}
+    db.run(query, params, callback)
+}
+
+var removePair = (req, res) => {
+    var query = "DELETE FROM wallet WHERE pair == ? AND userid == ?"
     var params = [req.params.name, req.params.userid]
     var callback = (err) => res.sendStatus(err ? 500 : 200)
-    console.log(query)
-    console.log(params)
     db.run(query, params, callback)
 }
 
 var updateWallet = (req, res) => {
     var query = "UPDATE wallet SET amount = ? WHERE pair == ? AND userid == ?"
-    var params = [req.params.amount, req.params.name, req.params.userid]
+    var params = [req.body, req.params.name, req.params.userid]
+    var callback = (err) => res.sendStatus(err ? 500 : 200)
+    db.run(query, params, callback)
+}
+
+// TODO track the price history of custom pairs
+var updatePair = (req, res) => {
+    console.log(req.params)
+    var query = "UPDATE wallet SET price = ? WHERE pair == ? and userid == ?"
+    var params = [req.body, req.params.name, req.params.userid]
     var callback = (err) => res.sendStatus(err ? 500 : 200)
     db.run(query, params, callback)
 }
@@ -38,8 +52,10 @@ app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
 app.get('/wallets/:userid', getWallets)
 // `curl -X PUT localhost:3000/wallets/DOGEBTC`
 app.put('/wallets/:userid/:name', addWallet)
-// `curl -X PUT localhost:3000/wallets/DOGEBTC/123`
-app.put('/wallets/:userid/:name/:amount', updateWallet)
+
+app.put('/wallets/:userid/:name/amount', updateWallet)
+app.put('/wallets/:userid/:name/price', updatePair)
+app.delete('/wallets/:userid/:name', removePair)
 
 // Supply javascript to the client. Can this be cleaner?
 app.get('/main.js', (req, res) => res.sendFile(__dirname + '/main.js'))

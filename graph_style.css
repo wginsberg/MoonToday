@@ -103,3 +103,13 @@ td {
     background: #e6f5ff;
     text-align: center;
 }
+
+.delete_coin {
+  height: 50px; 
+  display: none;
+}
+
+tr:hover td.delete_coin {
+  height: 50px; 
+  display: block;
+}
