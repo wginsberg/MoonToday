@@ -22,16 +22,17 @@ var wallets = function () {
             updateTotal()
         }
     }
-
-    xhr.open("GET", `http://localhost:3000/wallets/${get_cookie()}`);
+    var url = window.location.href.split('?')[0]
+    xhr.open("GET", `${url}wallets/${get_cookie()}`);
     xhr.send();
 }
 
 var add_coin_to_server = (coin, custom) => {
     xhr = new XMLHttpRequest();
-    console.log(`http://localhost:3000/wallets/${get_cookie()}/${coin}`)
+    var url = window.location.href.split('?')[0]
+    console.log(`${url}wallets/${get_cookie()}/${coin}`)
     xhr.open("PUT",
-             `http://localhost:3000/wallets/${get_cookie()}/${coin}`);
+             `${url}wallets/${get_cookie()}/${coin}`);
     xhr.send(custom ? true : '');
 }
 
@@ -72,7 +73,7 @@ var addRow = ({pair, amount, price, value, custom}) => {
             <td><button onclick="remove_coin('${pair}')"><i class="fa fa-trash"></i></button></td>
             <td>${amountInput(amount)}</td>
             <td class="price">${custom ? priceInput(price) : price}</td>
-            <td class="value">${value}</td>
+            <td class="value">${value.toFixed(2)}</td>
         </tr>`)
 }
 
@@ -110,14 +111,16 @@ var updateTotal = () => {
 }
 
 var updateAmountServer = (coin, amount) => {
+    var url = window.location.href.split('?')[0]
     xhr = new XMLHttpRequest();
-    xhr.open("PUT", `http://localhost:3000/wallets/${get_cookie()}/${coin}/amount/`);
+    xhr.open("PUT", `${url}wallets/${get_cookie()}/${coin}/amount/`);
     xhr.send(amount);
 }
 
 var updatePriceServer = (coin, price) => {
+    var url = window.location.href.split('?')[0]
     xhr = new XMLHttpRequest();
-    xhr.open("PUT", `http://localhost:3000/wallets/${get_cookie()}/${coin}/price/`);
+    xhr.open("PUT", `${url}wallets/${get_cookie()}/${coin}/price/`);
     xhr.send(price);
 }
 
@@ -158,9 +161,10 @@ var priceChange = e => {
 var remove_coin = (pair) => {
     // Remove from database
     xhr = new XMLHttpRequest();
-    console.log(`http://localhost:3000/wallets/${get_cookie()}/${pair}`)
+    var url = window.location.href.split('?')[0]
+    console.log(`${url}wallets/${get_cookie()}/${pair}`)
     xhr.open("DELETE",
-             `http://localhost:3000/wallets/${get_cookie()}/${pair}`);
+             `${url}wallets/${get_cookie()}/${pair}`);
     xhr.send();
 
     // remove from html
