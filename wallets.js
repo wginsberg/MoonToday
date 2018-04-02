@@ -40,13 +40,15 @@ var addToWallet = (_, {custom}) => {
     // Avoid duplicates
     if (!state.wallets.filter((wallet) => wallet.pair == pair).length) {
         if (custom) {
-            addRow({
+            var _state = {
                 pair: pair,
                 amount: "0.0",
                 price: "0.00",
                 value: "0.0",
                 custom: true
-            })
+            }
+            addRow(_state)
+            state.wallets.push(_state)
         } else {
              get_price(pair, "0.0")
         }
