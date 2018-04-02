@@ -23,15 +23,15 @@ var wallets = function () {
         }
     }
 
-    xhr.open("GET", `http://localhost:3000/wallets/${getCookie()}`);
+    xhr.open("GET", `http://localhost:3000/wallets/${get_cookie()}`);
     xhr.send();
 }
 
 var add_coin_to_server = (coin, custom) => {
     xhr = new XMLHttpRequest();
-    console.log(`http://localhost:3000/wallets/${getCookie()}/${coin}`)
+    console.log(`http://localhost:3000/wallets/${get_cookie()}/${coin}`)
     xhr.open("PUT",
-             `http://localhost:3000/wallets/${getCookie()}/${coin}`);
+             `http://localhost:3000/wallets/${get_cookie()}/${coin}`);
     xhr.send(custom ? true : '');
 }
 
@@ -109,13 +109,13 @@ var updateTotal = () => {
 
 var updateAmountServer = (coin, amount) => {
     xhr = new XMLHttpRequest();
-    xhr.open("PUT", `http://localhost:3000/wallets/${getCookie()}/${coin}/amount/`);
+    xhr.open("PUT", `http://localhost:3000/wallets/${get_cookie()}/${coin}/amount/`);
     xhr.send(amount);
 }
 
 var updatePriceServer = (coin, price) => {
     xhr = new XMLHttpRequest();
-    xhr.open("PUT", `http://localhost:3000/wallets/${getCookie()}/${coin}/price/`);
+    xhr.open("PUT", `http://localhost:3000/wallets/${get_cookie()}/${coin}/price/`);
     xhr.send(price);
 }
 
@@ -156,9 +156,9 @@ var priceChange = e => {
 var remove_coin = (pair) => {
     // Remove from database
     xhr = new XMLHttpRequest();
-    console.log(`http://localhost:3000/wallets/${getCookie()}/${pair}`)
+    console.log(`http://localhost:3000/wallets/${get_cookie()}/${pair}`)
     xhr.open("DELETE",
-             `http://localhost:3000/wallets/${getCookie()}/${pair}`);
+             `http://localhost:3000/wallets/${get_cookie()}/${pair}`);
     xhr.send();
 
     // remove from html

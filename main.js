@@ -98,9 +98,9 @@ var navigate = (page) => {
 }
 
 var main = () => {
+    init_cookie()
     navigate("wallets")
     get_pairs()
-    setCookieField()
 }
 
 var doughnutChart = function () {
