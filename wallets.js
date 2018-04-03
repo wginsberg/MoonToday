@@ -73,7 +73,7 @@ var addRow = ({pair, amount, price, value, custom}) => {
             <td><button onclick="remove_coin('${pair}')"><i class="fa fa-trash"></i></button></td>
             <td>${amountInput(amount)}</td>
             <td class="price">${custom ? priceInput(price) : price}</td>
-            <td class="value">${value.toFixed(2)}</td>
+            <td class="value">${Number(value).toFixed(2)}</td>
         </tr>`)
 }
 
