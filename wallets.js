@@ -27,17 +27,21 @@ var wallets = function () {
     xhr.send();
 }
 
+var set_default_wallet = () => {
+    var defaults = ["BTCUSD", "ETHUSD", "LTCUSD"]
+    defaults.map((pair) => addToWallet(null, {custom: false, name: pair}))
+}
+
 var add_coin_to_server = (coin, custom) => {
     xhr = new XMLHttpRequest();
     var url = window.location.href.split('?')[0]
-    console.log(`${url}wallets/${get_cookie()}/${coin}`)
     xhr.open("PUT",
              `${url}wallets/${get_cookie()}/${coin}`);
     xhr.send(custom ? true : '');
 }
 
-var addToWallet = (_, {custom}) => {
-    var pair = $("#search")[0].value
+var addToWallet = (_, {custom, name}) => {
+    var pair = name || $("#search")[0].value
     // Avoid duplicates
     if (!state.wallets.filter((wallet) => wallet.pair == pair).length) {
         if (custom) {
@@ -162,7 +166,6 @@ var remove_coin = (pair) => {
     // Remove from database
     xhr = new XMLHttpRequest();
     var url = window.location.href.split('?')[0]
-    console.log(`${url}wallets/${get_cookie()}/${pair}`)
     xhr.open("DELETE",
              `${url}wallets/${get_cookie()}/${pair}`);
     xhr.send();
@@ -173,7 +176,6 @@ var remove_coin = (pair) => {
     // remove from state.wallets
     for (var i=0; i<state.wallets.length; i++){
         if (state.wallets[i].pair == pair){
-            console.log(`removed ${state.wallets[i].pair}`)
             state.wallets.splice(i, 1)
             break
         }

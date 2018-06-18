@@ -1,3 +1,8 @@
+function get_cookie() {
+    var userID = document.cookie.replace(/(?:(?:^|.*;\s*)userID\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+    return userID
+}
+
 function set_cookie(userid="") {
     if (userid == "") {
         userid = make_id()
@@ -6,28 +11,14 @@ function set_cookie(userid="") {
     document.cookie = cookie
 }
 
-function init_cookie() {
-    var param = get_parameters()
-    var cookie = get_cookie()
-    if (param !== null) {
-        set_cookie(param)
-    }
-    else if (cookie != "") {
-        set_url()
-    } else {
-        set_cookie()
-        set_url()
-    }
-}
-
-function get_parameters() {
+function get_url_param() {
     var url_string = window.location.href
     var url = new URL(url_string)
     var c = url.searchParams.get("userid")
     return c
 }
 
-function set_url() {
+function set_url_param() {
     var cookie = get_cookie()
     window.location.href = window.location.href + '?userid=' + cookie
 }
@@ -43,7 +34,19 @@ function make_id() {
     return text
 }
 
-function get_cookie() {
-    var userID = document.cookie.replace(/(?:(?:^|.*;\s*)userID\s*\=\s*([^;]*).*$)|^.*$/, "$1")
-    return userID
+function init_cookie() {
+    var param = get_url_param()
+    var cookie = get_cookie()
+    if (param !== null) {
+        set_cookie(param)
+    }
+    else if (cookie != "") {
+        set_url_param()
+    } else {
+        set_cookie()
+        set_url_param()
+        set_default_wallet()
+    }
 }
+
+
