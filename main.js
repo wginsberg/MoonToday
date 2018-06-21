@@ -70,6 +70,7 @@ var get_pairs = () => {
         if (this.readyState == 4 && this.status == 200) {
             var json = JSON.parse(this.responseText)
             _state = json
+                .filter((json) => json.quote == "USD")
                 .map((json) => json.name)
             state.pairs = _state
 
