@@ -8,18 +8,66 @@ app.use(bodyParser.text());
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('MoonToday');
 
-var getWallets = (req, res) => {
-    var query = 'SELECT * FROM wallet WHERE userid == ?'
-    var params = [req.params.userid]
-    var callback = (err, rows) => res.send(rows)
+// Helper functions
+
+var validateUser = (userid, cb) => {
+    var query = "SELECT * FROM user WHERE userid == ?"
+    db.all(query, [userid], cb)
+}
+
+var addUser = (userid, cb) => {
+    var query = "INSERT INTO user VALUES (?)"
+    db.all(query,
+           [userid],
+           insertDefaultWallets(userid, cb))
+}
+
+var insertWallet = (params, callback) => {
+    var query = "INSERT INTO wallet (userid, pair, custom) VALUES (?, ?, ?)"
     db.all(query, params, callback)
+}
+
+var insertDefaultWallets = (userid, cb) => {
+    insertWallet([userid, "BTCUSD", false])
+    insertWallet([userid, "ETHUSD", false])
+    insertWallet([userid, "LTCUSD", false], cb)
+}
+
+// CRUD operations
+
+var getWallets = (req, res) => {
+    
+    var finish = (err, rows) => {
+        console.log(err)
+        console.log(rows)
+        if (err) {
+            console.log(err)
+            res.sendStatus(500)
+        } else {
+            res.send(rows)
+        }
+    }
+
+    var handleUser = () => {
+        console.log('hu');
+        var query = "SELECT * FROM wallet WHERE userid == ?"
+        var params = [req.params.userid]
+        db.all(query, params, finish)
+    }
+
+    var handleNewUser = () => {
+        console.log('hnu');
+        addUser(req.params.userid, handleUser)
+    }
+
+    validateUser(req.params.userid,
+                 (err, result) => result.length ? handleUser() : handleNewUser())
 };
 
 var addWallet = (req, res) => {
-    var query = "INSERT INTO wallet (userid, pair, custom) VALUES (?, ?, ?)"
     var params = [req.params.userid, req.params.name, Boolean(req.body.length)]
     var callback = (err) => {console.log(err); res.sendStatus(err ? 500 : 200)}
-    db.run(query, params, callback)
+    insertWallet(params, callback)
 }
 
 var removePair = (req, res) => {
