@@ -170,9 +170,6 @@ var remove_coin = (pair) => {
              `${url}wallets/${get_cookie()}/${pair}`);
     xhr.send();
 
-    // remove from html
-    $(`#${pair}`).remove()
-
     // remove from state.wallets
     for (var i=0; i<state.wallets.length; i++){
         if (state.wallets[i].pair == pair){
@@ -180,4 +177,8 @@ var remove_coin = (pair) => {
             break
         }
     }
+
+    // remove from html
+    $(`#${pair}`).remove()
+    updateTotal()
 }
