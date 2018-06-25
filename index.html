@@ -13,44 +13,40 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <nav class="navbar navbar-dark sticky-top bg-dark navbar-expand-lg">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#" onclick="navigate('wallets')">Moon Today</a>
       <span style="width: 100%">
           <input id="search" type="search" placeholder="Search" aria-label="Search">
       </span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </nav>
 
     <div class="container-fluid">
-      <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">
-                    (dummy)
-                </a>
-              </li>
-              <li class="nav-item">
-                <a id="wallets" class="nav-link" href="#" onclick="navigate('wallets')">
-                    <i class="fas fa-list fa-sm"></i>
-                    Wallets
-                </a>
-              </li>
-              <li class="nav-item">
-                <a id="doughnutChart" class="nav-link" href="#" onclick="navigate('doughnutChart')">
-                  <i class="fas fa-chart-pie fa-sm"></i>
-                  Summary
-                </a>
-              </li>
-              <li class="nav-item">
-                <a id="insights" class="nav-link" href="#" onclick="navigate('insights')">
-                  <i class="fas fa-chart-line fa-sm"></i>
-                  Insights
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <div class="row">
+            <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+                <nav id="navigation" class="collapse sidebar">
+                  <div class="nav-item">
+                    <a id="wallets" class="nav-link" href="#" onclick="navigate('wallets')">
+                        <i class="fas fa-list fa-sm"></i>
+                        Wallets
+                    </a>
+                  </div>
+                  <div class="nav-item">
+                    <a id="doughnutChart" class="nav-link" href="#" onclick="navigate('doughnutChart')">
+                      <i class="fas fa-chart-pie fa-sm"></i>
+                      Summary
+                    </a>
+                  </div>
+                  <div class="nav-item">
+                    <a id="insights" class="nav-link" href="#" onclick="navigate('insights')">
+                      <i class="fas fa-chart-line fa-sm"></i>
+                      Insights
+                    </a>
+                  </div>
+                </nav>
+            </div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
