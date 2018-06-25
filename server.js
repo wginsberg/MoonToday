@@ -39,7 +39,6 @@ var getWallets = (req, res) => {
     
     var finish = (err, rows) => {
         console.log(err)
-        console.log(rows)
         if (err) {
             console.log(err)
             res.sendStatus(500)
@@ -49,14 +48,12 @@ var getWallets = (req, res) => {
     }
 
     var handleUser = () => {
-        console.log('hu');
         var query = "SELECT * FROM wallet WHERE userid == ?"
         var params = [req.params.userid]
         db.all(query, params, finish)
     }
 
     var handleNewUser = () => {
-        console.log('hnu');
         addUser(req.params.userid, handleUser)
     }
 
@@ -86,7 +83,6 @@ var updateWallet = (req, res) => {
 
 // TODO track the price history of custom pairs
 var updatePair = (req, res) => {
-    console.log(req.params)
     var query = "UPDATE wallet SET price = ? WHERE pair == ? and userid == ?"
     var params = [req.body, req.params.name, req.params.userid]
     var callback = (err) => res.sendStatus(err ? 500 : 200)
