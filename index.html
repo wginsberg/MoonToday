@@ -13,19 +13,17 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark navbar-expand-lg">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#" onclick="navigate('wallets')">Moon Today</a>
-      <span style="width: 100%">
-          <input id="search" type="search" placeholder="Search" aria-label="Search">
-      </span>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark d-flex justify-content-md-start justify-content-sm-between">
+        <a class="navbar-brand col-5 col-md-2" href="#" onclick="navigate('wallets')">Moon Today</a>
+        <button class="col-2 navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <input class="col-12 col-md-4" id="search" type="search" placeholder="Search" aria-label="Search">
     </nav>
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <div class="col-12 col-md-3 col-lg-2 bd-sidebar">
                 <nav id="navigation" class="collapse sidebar">
                   <div class="nav-item">
                     <a id="wallets" class="nav-link" href="#" onclick="navigate('wallets')">

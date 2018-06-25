@@ -20,6 +20,7 @@
   "homepage": "https://github.com/csc309-18s/assignment-3-senpai-please-notice-me#readme",
   "dependencies": {
     "express": "^4.16.3",
+    "nodemon": "^1.17.5",
     "sqlite3": "^4.0.0"
   }
 }
