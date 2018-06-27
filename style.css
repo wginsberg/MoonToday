@@ -1,3 +1,11 @@
+/*
+ * Wallet modal
+ */
+.modal .modal-dialog .modal-content {
+    height: 300px;
+    width: 100%;
+}
+
 .form-control {
   max-width: 100px;
   margin: auto;

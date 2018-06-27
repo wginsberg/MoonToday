@@ -38,7 +38,7 @@
                     </a>
                   </div>
                   <div class="nav-item">
-                    <a id="insights" class="nav-link" href="#" onclick="navigate('insights')">
+                    <a id="insights" class="nav-link" href="#" onclick="state.currentPair=PAIR_AGGREGATE; navigate('insights')">
                       <i class="fas fa-chart-line fa-sm"></i>
                       Insights
                     </a>
@@ -48,7 +48,11 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
-          <div id="walletsView" class="view table-responsive">
+        <div id="walletsView" class="view table-responsive">
+            <div id="dialogBox" style="display: none;">
+                <div id="wallet_chart" class="dialog" style="height: 250px; width: 100%;"></div>
+            </div>
+
             <table class="table table-striped table-sm">
                 <thead>
                     <tr>
@@ -161,7 +165,10 @@
     <script type="text/javascript" src="insights.js"></script>
     <script type="text/javascript" src="market.js"></script>
     <script type="text/javascript" src="doughnutChart.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.min.js"></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-  </body>
+</body>
 </html>

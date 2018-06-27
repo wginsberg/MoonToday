@@ -1,3 +1,5 @@
+const PAIR_AGGREGATE = "Portfolio"
+
 var state = {
     currentPage: "wallets",
     currentPair: "",
@@ -82,8 +84,6 @@ var get_pairs = () => {
 }
 
 var navigate = (page) => {
-
-    // Change view
     $(`#${state.currentPage}View`).hide()
     $(`#${page}View`).show()
     window[page]()
