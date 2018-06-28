@@ -11,6 +11,7 @@ TODO in order of priority:
 [x] Proper layout of main page on mobile
 [x] Insights button takes you to a portfolio aggregate chart
 [x] Clicking on a wallet brings up a coin insight in a modal window
+[ ] Do something with the insights page
 * Add a special message to the Summary page for null wallets
 * Add loading animation for wallets page
 * Better loading animation for Insights
