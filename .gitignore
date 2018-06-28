@@ -2,3 +2,4 @@ node_modules/*
 MoonToday
 *.swp
 .DS_Store
+MoonToday.pem
