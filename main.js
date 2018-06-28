@@ -104,6 +104,16 @@ var main = () => {
     get_pairs()
 }
 
+var disableAggregateFeatures = () => {
+    $("#doughnutChart").addClass("disabled")
+    $("#insights").addClass("disabled")
+}
+
+var enableAggregateFeatures = () => {
+    $("#doughnutChart").removeClass("disabled")
+    $("#insights").removeClass("disabled")
+}
+
 var doughnutChart = function () {
     var dataPoints = []
     for (var key in dict) {

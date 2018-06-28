@@ -53,6 +53,12 @@
   font-size: .75rem;
   text-transform: uppercase;
 }
+.sidebar .disabled {
+    pointer-events: none !important;
+    cursor: default;
+    color: #b4b4b4;
+}
+
 /*
  * Navbar
  */

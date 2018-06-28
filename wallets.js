@@ -107,11 +107,17 @@ var get_price = (coin, coin_amount) => {
 }
 
 var updateTotal = () => {
+    
     var total_value = state.wallets.map(({name, amount, price, value}) => value)
                 .map(Number)
                 .reduce((a,b) => a+b, 0)
-                .toFixed(2)
-    var total = $("tfoot > tr > .value").text(`$${total_value}`)
+    console.log(total_value)
+    if (total_value > 0) {
+        enableAggregateFeatures()
+    } else {
+        disableAggregateFeatures()
+    }
+    var total = $("tfoot > tr > .value").text(`$${total_value.toFixed(2)}`)
 }
 
 var updateAmountServer = (coin, amount) => {
