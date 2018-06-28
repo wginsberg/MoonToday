@@ -81,13 +81,16 @@ var draw_chart = (hours, chart_id, render, pair) => {
         },
         toolTip: {
             shared: true,
+            content: "<span style='\"'color: {color};'\"'>{name}</span>: ${y}"
         },
         data: data_pts
     });
 
     var parse_history = (pair, data) => {
         data = data.map((item) => {
-                    price = 0.5*(Number(item['ticker']['ask']) + Number(item['ticker']['bid']))
+                    price = Number(item['ticker']['ask']) + Number(item['ticker']['bid'])
+                    price *=  0.5
+                    price = Number(price.toFixed(2))
                     date = new Date(item['created_on'])
                     date.setMinutes(0)
                     date.setSeconds(0)
