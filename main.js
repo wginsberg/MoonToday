@@ -4,7 +4,10 @@ var state = {
     currentPage: "wallets",
     currentPair: "",
     wallets: [],
-    pairs: []
+    pairs: [],
+    insights: {
+        movers: [] 
+    }
 }
 
 var substringMatcher = function(strs) {

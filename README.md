@@ -1,4 +1,5 @@
 BUGS:
+[x] Broken typeahead
 [x] Update total on wallet delete
 [ ] Server crashes when client opened in second browser
 
@@ -11,7 +12,9 @@ TODO in order of priority:
 [x] Proper layout of main page on mobile
 [x] Insights button takes you to a portfolio aggregate chart
 [x] Clicking on a wallet brings up a coin insight in a modal window
-[ ] Do something with the insights page
+[x] Biggest movers on insights page
+[ ] Spinners on insights page
+[ ] Portfolio stats on insights page
 * Add a special message to the Summary page for null wallets
 * Add loading animation for wallets page
 * Better loading animation for Insights

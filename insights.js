@@ -2,9 +2,8 @@
 
 var insights = (hours) => {
     hours = hours || 24
+    state.insights.movers = []
     draw_chart(hours, "price_chart", render_insights_chart, PAIR_AGGREGATE)
-    get_market_data(hours)
-    get_holding_value(hours)
 }
 
 var wallet_modal = (event) => {
@@ -31,10 +30,46 @@ var wallet_modal = (event) => {
 // Renderers
 
 var render_insights_chart = (chart, data_pts, pair, data) => {
+
+    var update_insight_state = () => {
+        var start = data[0].y
+        var end = data[data.length - 1].y
+        var change = Number((end - start) / start).toFixed(2)
+        
+        var _state = {
+            pair: pair,
+            start: start,
+            end: end,
+            change: change
+        }
+        
+        state.insights.movers.push(_state)
+    }
+
+    var render_insight_table = () => {
+        update_insight_state()
+
+        var min = state.insights.movers.reduce((a, c) => a.change < c.change ? a : c)
+        var max = state.insights.movers.reduce((a, c) => a.change > c.change ? a : c)
+        
+        $("#insight-up > td:nth-child(1)").text(max.pair)
+        $("#insight-up > td:nth-child(2)").text(`$${max.start}`)
+        $("#insight-up > td:nth-child(3)").text(`$${max.end}`)
+        $("#insight-up > td:nth-child(4)").text(`${max.change}%`)
+ 
+        $("#insight-down > td:nth-child(1)").text(min.pair)
+        $("#insight-down > td:nth-child(2)").text(`$${min.start}`)
+        $("#insight-down > td:nth-child(3)").text(`$${min.end}`)
+        $("#insight-down > td:nth-child(4)").text(`${min.change}%`)
+
+   }
+
     data_pts.filter(line => line.name == pair)[0].dataPoints = data
     $('#loader_chart').hide()
     $('#price_chart').show()
     chart.render();
+
+    render_insight_table()
 }
 
 var render_wallet_modal = (chart, data_pts, pair, data) => {
