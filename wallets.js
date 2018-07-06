@@ -59,6 +59,13 @@ var addToWallet = (_, {custom, name}) => {
         }
         add_coin_to_server(pair, custom)
         state.pairs.pop(state.pairs.indexOf(pair))
+        
+        // Animate navbar link
+        var navbar_link = document.getElementById("wallets") 
+        navbar_link.addEventListener("animationend",
+                                     (e) => e.target.classList.remove("stretched"),
+                                     false)
+        navbar_link.classList.add("stretched")
     }
 }
 
