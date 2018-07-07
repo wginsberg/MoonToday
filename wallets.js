@@ -191,6 +191,8 @@ var remove_coin = (pair) => {
             break
         }
     }
+    // Add to state.pairs
+    state.pairs.push(pair)
 
     // remove from html
     $(`#${pair}`).remove()
