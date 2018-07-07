@@ -35,15 +35,16 @@ var render_insights_chart = (chart, data_pts, pair, data) => {
         var start = data[0].y
         var end = data[data.length - 1].y
         var change = Number((end - start) / start).toFixed(2)
-        
-        var _state = {
-            pair: pair,
-            start: start,
-            end: end,
-            change: change
+       
+        if (isFinite(change)) {
+            var _state = {
+                pair: pair,
+                start: start,
+                end: end,
+                change: change
+            }
+            state.insights.movers.push(_state)
         }
-        
-        state.insights.movers.push(_state)
     }
 
     var render_insight_table = () => {
