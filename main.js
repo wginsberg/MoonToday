@@ -52,6 +52,7 @@ var typeaheadSuggestion = ({suggestion}) => {
 }
 
 var autocompleteInit = () => {
+    get_pairs()
     $('#search').typeahead({
       hint: true,
       highlight: false,
@@ -80,7 +81,6 @@ var get_pairs = () => {
             var wallet_pairs = state.wallets.map((wallet) => wallet.pair)
             state.pairs = state.pairs.filter((pair) => wallet_pairs.indexOf(pair) == -1)
 
-            autocompleteInit()
         }
     }
     xhr.open("GET", "https://api.nexchange.io/en/api/v1/pair/");
@@ -105,7 +105,7 @@ var navigate = (page) => {
 var main = () => {
     init_cookie()
     navigate("wallets")
-    get_pairs()
+    autocompleteInit()
 }
 
 var disableAggregateFeatures = () => {
