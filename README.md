@@ -1,4 +1,5 @@
 BUGS:
+[ ] Default coins still appear in typeahead
 [x] Broken typeahead
 [x] Update total on wallet delete
 [ ] Server crashes when client opened in second browser

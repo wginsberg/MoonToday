@@ -58,7 +58,7 @@ var addToWallet = (_, {custom, name}) => {
              get_price(pair, "0.0")
         }
         add_coin_to_server(pair, custom)
-        state.pairs.pop(state.pairs.indexOf(pair))
+        state.pairs.splice(state.pairs.indexOf(pair), 1)
         
         // Animate navbar link
         var navbar_link = document.getElementById("wallets") 
@@ -102,6 +102,7 @@ var get_price = (coin, coin_amount) => {
                 value: price*coin_amount,
             }
             state.wallets.push(_state)
+            state.pairs.splice(state.pairs.indexOf(coin), 1)
 
             addRow(_state)
 

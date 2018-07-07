@@ -10,8 +10,7 @@ var state = {
     }
 }
 
-var substringMatcher = function(strs) {
-  return function findMatches(q, cb) {
+var substringMatcher = (q, cb) => {
     var matches, substringRegex;
 
     // an array that will be populated with substring matches
@@ -22,7 +21,7 @@ var substringMatcher = function(strs) {
 
     // iterate through the pool of strings and for any string that
     // contains the substring `q`, add it to the `matches` array
-    $.each(strs, function(i, str) {
+    $.each(state.pairs, function(i, str) {
       if (substrRegex.test(str)) {
         match = {
             display: str,
@@ -44,7 +43,6 @@ var substringMatcher = function(strs) {
     }
 
     cb(matches);
-  };
 };
 
 var typeaheadSuggestion = ({suggestion}) => {
@@ -61,7 +59,7 @@ var autocompleteInit = () => {
     },
     {
       name: 'states',
-      source: substringMatcher(state.pairs),
+      source: substringMatcher,
       display: (data) => data.display,
       templates: {
         suggestion: typeaheadSuggestion
@@ -78,6 +76,9 @@ var get_pairs = () => {
                 .filter((json) => json.quote == "USD")
                 .map((json) => json.name)
             state.pairs = _state
+
+            var wallet_pairs = state.wallets.map((wallet) => wallet.pair)
+            state.pairs = state.pairs.filter((pair) => wallet_pairs.indexOf(pair) == -1)
 
             autocompleteInit()
         }
