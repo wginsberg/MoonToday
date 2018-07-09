@@ -23,6 +23,7 @@ var addUser = (userid, cb) => {
 }
 
 var insertWallet = (params, callback) => {
+    console.log(`insertWallet ${params} ${callback}`)
     var query = "INSERT INTO wallet (userid, pair, custom) VALUES (?, ?, ?)"
     db.all(query, params, callback)
 }
@@ -38,7 +39,6 @@ var insertDefaultWallets = (userid, cb) => {
 var getWallets = (req, res) => {
     
     var finish = (err, rows) => {
-        console.log(err)
         if (err) {
             console.log(err)
             res.sendStatus(500)
@@ -102,6 +102,8 @@ app.put('/wallets/:userid/:name/price', updatePair)
 app.delete('/wallets/:userid/:name', removePair)
 
 // Supply javascript to the client. Can this be cleaner?
+app.get('/js/spin.js', (req, res) => res.sendFile(__dirname + '/js/spin.js'))
+app.get('/js/spin.css', (req, res) => res.sendFile(__dirname + '/js/spin.css'))
 app.get('/js/typeahead.bundle.min.js', (req, res) => res.sendFile(__dirname + '/js/typeahead.bundle.min.js'))
 app.get('/js/jquery-3.3.1.min.js', (req, res) => res.sendFile(__dirname + '/js/jquery-3.3.1.min.js'))
 app.get('/js/jquery-ui.js', (req, res) => res.sendFile(__dirname + '/js/jquery-ui.js'))

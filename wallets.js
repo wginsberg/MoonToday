@@ -1,25 +1,43 @@
 var wallets = function () {
-    // Avoid duplicate entries on navigation
+    
+    // On repeat navigation to wallets, main.js handles everything
     if (state.wallets.length) {
         return
     }
+    
+    // Set spinner
+    var spinner = new Spinner()
+    spinner.spin(document.getElementById("walletsView"))
+
+    // Populate wallet data
     xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var json = JSON.parse(this.responseText)
+            
+            // setup table
+            spinner.stop()
+            var table = $(table_scoffolding)
+            
+            // add rows
             for(item of json){
                 var coin = item['pair']
                 var amount = item['amount']
                 var custom = item['custom']
                 if (custom) {
                     item['value'] = (item['amount'] * item['price']).toFixed(2)
-                    addRow(item)
-                    state.wallets.push(item)
-                } else {
-                    get_price(coin, amount)
-                }
+                } //} else {
+                  //  get_price(coin, amount)
+                //}
+                addRow(item, table)
+                state.wallets.push(item)
             }
+            $("#walletsView").append(table)
+            // revisit this vvv
             updateTotal()
+            
+            json.filter((item) => !item['custom'])
+                .map((item) => get_price(item['pair'], item['amount']))
         }
     }
     var url = window.location.href.split('?')[0]
@@ -27,10 +45,27 @@ var wallets = function () {
     xhr.send();
 }
 
-var set_default_wallet = () => {
-    var defaults = ["BTCUSD", "ETHUSD", "LTCUSD"]
-    defaults.map((pair) => addToWallet(null, {custom: false, name: pair}))
-}
+var table_scoffolding = `<table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Coin</th>
+                                    <th width=40 border=0px></th>
+                                    <th>Amount</th>
+                                    <th>Unit Price ($)</th>
+                                    <th>Value ($)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="coins"></tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Total</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="value">-</th>
+                                </tr>
+                            </tfoot>
+                        </table>`
 
 var add_coin_to_server = (coin, custom) => {
     xhr = new XMLHttpRequest();
@@ -77,8 +112,9 @@ var priceInput = (price) => {
     return `<input type="number" class="form-control" value="${price}" step="0.01" min="0" oninput="priceChange(this)">`
 }
 
-var addRow = ({pair, amount, price, value, custom}) => {
-    $("#coins").append(`
+var addRow = ({pair, amount, price, value, custom}, table) => {
+    table = table || $("#coins")
+    table.append(`
         <tr class="coin" id="${pair}">
             <td><a href="#" onclick="wallet_modal(this)">${pair}</a></td>
             <td><button onclick="remove_coin('${pair}')"><i class="fa fa-trash"></i></button></td>
@@ -94,18 +130,29 @@ var get_price = (coin, coin_amount) => {
         if (this.readyState == 4 && this.status == 200) {
             var json = JSON.parse(this.responseText)
             var price = Number(json[0]["ticker"]["ask"]).toFixed(2)
+            var value = Number(price * coin_amount).toFixed(2)
 
-            var _state = {
-                pair: coin,
-                amount: coin_amount,
-                price: price,
-                value: price*coin_amount,
+            var _state = state.wallets.find((wallet) => wallet.pair == coin)
+            if (_state) {
+                // Update existing wallet
+                _state.price = price
+                _state.value = value
+                $(`#${coin} > td.price`).text(_state.price)
+                $(`#${coin} > td.value`).text(_state.value)
+            } else {
+                // Add new wallet
+                _state = {
+                    pair: coin,
+                    amount: coin_amount,
+                    price: price,
+                    value: price*coin_amount,
+                }
+                state.wallets.push(_state)
+                addRow(_state)
             }
-            state.wallets.push(_state)
+            
+            // TODO move this
             state.pairs.splice(state.pairs.indexOf(coin), 1)
-
-            addRow(_state)
-
             updateTotal()
         }
     }
@@ -119,7 +166,6 @@ var updateTotal = () => {
     var total_value = state.wallets.map(({name, amount, price, value}) => value)
                 .map(Number)
                 .reduce((a,b) => a+b, 0)
-    console.log(total_value)
     if (total_value > 0) {
         enableAggregateFeatures()
     } else {
@@ -153,7 +199,7 @@ var amountChange = e => {
         _state.value = (_state.amount * _state.price).toFixed(2)
 
         // Update element
-        $(`#${coin} > .value`).text(`$${_state.value}`)
+        $(`#${coin} > .value`).text(`${_state.value}`)
 
         updateTotal()
         updateAmountServer(coin, _state.amount)

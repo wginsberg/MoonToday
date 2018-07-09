@@ -45,7 +45,6 @@ function init_cookie() {
     } else {
         set_cookie()
         set_url_param()
-        set_default_wallet()
     }
 }
 
