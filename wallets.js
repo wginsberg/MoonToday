@@ -26,9 +26,7 @@ var wallets = function () {
                 var custom = item['custom']
                 if (custom) {
                     item['value'] = (item['amount'] * item['price']).toFixed(2)
-                } //} else {
-                  //  get_price(coin, amount)
-                //}
+                }
                 addRow(item, table)
                 state.wallets.push(item)
             }
@@ -114,6 +112,11 @@ var priceInput = (price) => {
 
 var addRow = ({pair, amount, price, value, custom}, table) => {
     table = table || $("#coins")
+    
+    // Prevent NaN from appearing in the table
+    price = isFinite(price) ? price : ''
+    value = isFinite(value) ? value : ''
+
     table.append(`
         <tr class="coin" id="${pair}">
             <td><a href="#" onclick="wallet_modal(this)">${pair}</a></td>
