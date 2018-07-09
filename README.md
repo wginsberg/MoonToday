@@ -3,7 +3,7 @@ BUGS:
 [x] Default coins still appear in typeahead
 [x] Broken typeahead
 [x] Update total on wallet delete
-[ ] Server crashes when client opened in second browser
+[x] Server crashes when client opened in second browser
 
 IDEADS:
 * crypto headlines in the navbar with links
