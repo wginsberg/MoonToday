@@ -1,6 +1,12 @@
 // Top level functions
 
+let spinner
+
 var insights = (hours) => {
+    
+    spinner = spinner || new Spinner()
+    spinner.spin(document.getElementById("insightsView"))
+
     hours = hours || 24
     state.insights.movers = []
     draw_chart(hours, "price_chart", render_insights_chart, PAIR_AGGREGATE)
@@ -30,6 +36,8 @@ var wallet_modal = (event) => {
 // Renderers
 
 var render_insights_chart = (chart, data_pts, pair, data) => {
+    
+    spinner.stop()
 
     var update_insight_state = () => {
         var start = data[0].y
