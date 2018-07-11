@@ -108,15 +108,22 @@ var main = () => {
     autocompleteInit()
 }
 
-var disableAggregateFeatures = () => {
+var disableDoughnutChart = () => {
     $("#doughnutChart").addClass("disabled")
+}
+
+var enableDoughnutChart = () => {
+    $("#doughnutChart").removeClass("disabled")
+}
+
+var disableInsights = () => {
     $("#insights").addClass("disabled")
 }
 
-var enableAggregateFeatures = () => {
-    $("#doughnutChart").removeClass("disabled")
+var enableInsights = () => {
     $("#insights").removeClass("disabled")
 }
+
 
 var doughnutChart = function () {
     var dataPoints = []

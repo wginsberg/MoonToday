@@ -16,7 +16,9 @@ TODO in order of priority:
 [x] Clicking on a wallet brings up a coin insight in a modal window
 [x] Biggest movers on insights page
 [x] Add loading animation for wallets page
-[ ] Spinners on insights page
+[x] Spinners on insights page
+[x] Change disabled feature logic: Allow insights only with a non-zero number of non-custom wallets, summary only with non-zero portfolio total
+[ ] Enter key should work on search bar
 [ ] Portfolio stats on insights page
 * Better loading animation for Insights
 * Recaptcha

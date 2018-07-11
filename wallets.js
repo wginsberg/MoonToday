@@ -99,6 +99,9 @@ var addToWallet = (_, {custom, name}) => {
                                      (e) => e.target.classList.remove("stretched"),
                                      false)
         navbar_link.classList.add("stretched")
+
+        // Enable insights navbar link
+        if (!custom) enableInsights()
     }
 }
 
@@ -170,9 +173,9 @@ var updateTotal = () => {
                 .map(Number)
                 .reduce((a,b) => a+b, 0)
     if (total_value > 0) {
-        enableAggregateFeatures()
+        enableDoughnutChart()
     } else {
-        disableAggregateFeatures()
+        disableDoughnutChart()
     }
     var total = $("tfoot > tr > .value").text(`$${total_value.toFixed(2)}`)
 }
@@ -246,4 +249,7 @@ var remove_coin = (pair) => {
     // remove from html
     $(`#${pair}`).remove()
     updateTotal()
+
+    // Disable insights navbar link
+    if (!state.wallets.find((wallet) => !wallet.custom)) disableInsights()
 }
