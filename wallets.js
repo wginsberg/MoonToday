@@ -160,6 +160,9 @@ var get_price = (coin, coin_amount) => {
             // TODO move this
             state.pairs.splice(state.pairs.indexOf(coin), 1)
             updateTotal()
+
+            // Trigger chart re-rendering
+            if (state.currentPage != "wallets") navigate(state.currentPage)
         }
     }
     xhr.open("GET",
