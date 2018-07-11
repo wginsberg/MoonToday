@@ -1,9 +1,15 @@
 // Top level functions
 
 let spinner
+let table_spinner
 
 var insights = (hours) => {
-    
+   
+    // Clean up previous charts
+    $("#market_data *").remove()
+    table_spinner = table_spinner || new Spinner()
+    table_spinner.spin(document.getElementById("market_data")) 
+
     spinner = spinner || new Spinner()
     spinner.spin(document.getElementById("insightsView"))
 
@@ -58,20 +64,56 @@ var render_insights_chart = (chart, data_pts, pair, data) => {
     var render_insight_table = () => {
         update_insight_state()
 
-        var min = state.insights.movers.reduce((a, c) => a.change < c.change ? a : c)
-        var max = state.insights.movers.reduce((a, c) => a.change > c.change ? a : c)
-        
-        $("#insight-up > td:nth-child(1)").text(max.pair)
-        $("#insight-up > td:nth-child(2)").text(`$${max.start}`)
-        $("#insight-up > td:nth-child(3)").text(`$${max.end}`)
-        $("#insight-up > td:nth-child(4)").text(`${max.change}%`)
- 
-        $("#insight-down > td:nth-child(1)").text(min.pair)
-        $("#insight-down > td:nth-child(2)").text(`$${min.start}`)
-        $("#insight-down > td:nth-child(3)").text(`$${min.end}`)
-        $("#insight-down > td:nth-child(4)").text(`${min.change}%`)
+        if (state.insights.movers.length < 3) {
+            $("#market_data *").remove()
+        } else {
+            var min = state.insights.movers.reduce((a, c) => a.change < c.change ? a : c)
+            var max = state.insights.movers.reduce((a, c) => a.change > c.change ? a : c)
+            
+            // Operate on existing table or add new one if needed
+            var table = $("#market_data table").length ? $("#market_data table") : $(table_scaffolding)
 
-   }
+            table.find("#insight-up > td:nth-child(1)").text(max.pair)
+            table.find("#insight-up > td:nth-child(2)").text(`$${max.start}`)
+            table.find("#insight-up > td:nth-child(3)").text(`$${max.end}`)
+            table.find("#insight-up > td:nth-child(4)").text(`${max.change}%`)
+     
+            table.find("#insight-down > td:nth-child(1)").text(min.pair)
+            table.find("#insight-down > td:nth-child(2)").text(`$${min.start}`)
+            table.find("#insight-down > td:nth-child(3)").text(`$${min.end}`)
+            table.find("#insight-down > td:nth-child(4)").text(`${min.change}%`)
+
+            table_spinner.stop()
+            if (!$("#market_data table").length) $("#market_data").append(table)
+        }
+    }
+
+    var table_scaffolding = `
+        <h4 id='market_title' class='title'>Biggest Movers</h4>
+        <table class="table table-striped table-sm">
+          <thead>
+              <tr>
+                  <th>Coin</th>
+                  <th>Start</th>
+                  <th>End</th>
+                  <th>Change</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr id="insight-up">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr id="insight-down">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+          </tbody>
+        </table>`
 
     data_pts.filter(line => line.name == pair)[0].dataPoints = data
     $('#loader_chart').hide()
