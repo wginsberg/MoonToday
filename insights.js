@@ -70,18 +70,21 @@ var render_insights_chart = (chart, data_pts, pair, data) => {
             var min = state.insights.movers.reduce((a, c) => a.change < c.change ? a : c)
             var max = state.insights.movers.reduce((a, c) => a.change > c.change ? a : c)
             
+            min.formattedChange = min.change == 0 ? "> 0.00%" : `${min.change}%`
+            max.formattedChange = max.change == 0 ? "> 0.00%" :`${ max.change}%`
+
             // Operate on existing table or add new one if needed
             var table = $("#market_data table").length ? $("#market_data table") : $(table_scaffolding)
 
             table.find("#insight-up > td:nth-child(1)").text(max.pair)
             table.find("#insight-up > td:nth-child(2)").text(`$${max.start}`)
             table.find("#insight-up > td:nth-child(3)").text(`$${max.end}`)
-            table.find("#insight-up > td:nth-child(4)").text(`${max.change}%`)
+            table.find("#insight-up > td:nth-child(4)").text(`${max.formattedChange}`)
      
             table.find("#insight-down > td:nth-child(1)").text(min.pair)
             table.find("#insight-down > td:nth-child(2)").text(`$${min.start}`)
             table.find("#insight-down > td:nth-child(3)").text(`$${min.end}`)
-            table.find("#insight-down > td:nth-child(4)").text(`${min.change}%`)
+            table.find("#insight-down > td:nth-child(4)").text(`${min.formattedChange}`)
 
             table_spinner.stop()
             if (!$("#market_data table").length) $("#market_data").append(table)

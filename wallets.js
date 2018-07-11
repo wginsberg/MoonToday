@@ -180,7 +180,8 @@ var updateTotal = () => {
     } else {
         disableDoughnutChart()
     }
-    var total = $("tfoot > tr > .value").text(`$${total_value.toFixed(2)}`)
+    var formatted = total_value < 0.01 ? "> $0.00" : `$${total_value.toFixed(2)}`
+    var total = $("tfoot > tr > .value").text(formatted)
 }
 
 var updateAmountServer = (coin, amount) => {

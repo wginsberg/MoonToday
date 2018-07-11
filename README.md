@@ -20,7 +20,7 @@ TODO in order of priority:
 [x] Change disabled feature logic: Allow insights only with a non-zero number of non-custom wallets, summary only with non-zero portfolio total
 [x] Disable 'Biggest Movers' When there are fewer than 3 wallets
 [x] Adding wallet should trigger re-render of charts
-[ ] Insight table should report change as '> 0.00%' instead of '0.00%'
+[x] Tables report small values as > 0 instead of simply rounding to 0
 [ ] Portfolio stats on insights page
 [ ] Enter key should work on search bar
 * Better loading animation for Insights
