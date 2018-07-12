@@ -23,7 +23,6 @@ var addUser = (userid, cb) => {
 }
 
 var insertWallet = (params, callback) => {
-    console.log(`insertWallet ${params} ${callback}`)
     var query = "INSERT INTO wallet (userid, pair, custom) VALUES (?, ?, ?)"
     db.all(query, params, callback)
 }
@@ -63,7 +62,10 @@ var getWallets = (req, res) => {
 
 var addWallet = (req, res) => {
     var params = [req.params.userid, req.params.name, Boolean(req.body.length)]
-    var callback = (err) => {console.log(err); res.sendStatus(err ? 500 : 200)}
+    var callback = (err) => {
+        if (err) console.log(err)
+        res.sendStatus(err ? 500 : 200)
+    }
     insertWallet(params, callback)
 }
 
