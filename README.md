@@ -21,6 +21,7 @@ TODO in order of priority:
 [x] Disable 'Biggest Movers' When there are fewer than 3 wallets
 [x] Adding wallet should trigger re-render of charts
 [x] Tables report small values as > 0 instead of simply rounding to 0
+[x] Disable graph for custom coins
 [ ] Portfolio stats on insights page
 [ ] Enter key should work on search bar
 * Better loading animation for Insights

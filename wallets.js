@@ -120,9 +120,13 @@ var addRow = ({pair, amount, price, value, custom}, table) => {
     price = isFinite(price) ? price : ''
     value = isFinite(value) ? value : ''
 
+    const name_a = `<a href="#" onclick="wallet_modal(this)">${pair}</a>`
+    const name_p = `<p>${pair}</p>`
+    var name_element = custom ? name_p : name_a
+
     table.append(`
         <tr class="coin" id="${pair}">
-            <td><a href="#" onclick="wallet_modal(this)">${pair}</a></td>
+            <td>${name_element}</td>
             <td><button onclick="remove_coin('${pair}')"><i class="fa fa-trash"></i></button></td>
             <td>${amountInput(amount)}</td>
             <td class="price">${custom ? priceInput(price) : price}</td>
