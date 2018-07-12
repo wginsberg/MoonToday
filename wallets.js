@@ -244,15 +244,10 @@ var remove_coin = (pair) => {
              `${url}wallets/${get_cookie()}/${pair}`);
     xhr.send();
 
-    // remove from state.wallets
-    for (var i=0; i<state.wallets.length; i++){
-        if (state.wallets[i].pair == pair){
-            state.wallets.splice(i, 1)
-            break
-        }
-    }
-    // Add to state.pairs
-    state.pairs.push(pair)
+    // Update state
+    var i = state.wallets.findIndex((wallet) => wallet.pair == pair)
+    if (!state.wallets[i].custom) state.pairs.push(pair)
+    state.wallets.splice(i, 1)
 
     // remove from html
     $(`#${pair}`).remove()

@@ -4,7 +4,7 @@ BUGS:
 [x] Broken typeahead
 [x] Update total on wallet delete
 [x] Server crashes when client opened in second browser
-[ ] Deleted custom coins appear in typeahead
+[x] Deleted custom coins appear in typeahead
 
 IDEADS:
 * crypto headlines in the navbar with links
