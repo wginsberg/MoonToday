@@ -4,6 +4,7 @@ BUGS:
 [x] Broken typeahead
 [x] Update total on wallet delete
 [x] Server crashes when client opened in second browser
+[ ] Deleted custom coins appear in typeahead
 
 IDEADS:
 * crypto headlines in the navbar with links
@@ -23,7 +24,7 @@ TODO in order of priority:
 [x] Tables report small values as > 0 instead of simply rounding to 0
 [x] Disable graph for custom coins
 [ ] Portfolio stats on insights page
-[ ] Enter key should work on search bar
+[x] Enter key should work on search bar
 * Better loading animation for Insights
 * Recaptcha
 * Routing

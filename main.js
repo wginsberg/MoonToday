@@ -65,7 +65,12 @@ var autocompleteInit = () => {
       templates: {
         suggestion: typeaheadSuggestion
       }
-    }).on("typeahead:selected", addToWallet);
+    }).on("typeahead:selected", addToWallet)
+      .on('keyup', this, function (event) {
+            if (event.keyCode == 13) {
+                $('.tt-selectable').first().trigger('click')
+            }
+        });
 }
 
 var get_pairs = () => {
