@@ -179,12 +179,15 @@ var updateTotal = () => {
     var total_value = state.wallets.map(({name, amount, price, value}) => value)
                 .map(Number)
                 .reduce((a,b) => a+b, 0)
+    if (isNaN(total_value)) total_value = 0
     if (total_value > 0) {
         enableDoughnutChart()
     } else {
         disableDoughnutChart()
     }
-    var formatted = total_value < 0.01 ? "> $0.00" : `$${total_value.toFixed(2)}`
+    var formatted = (total_value > 0 && total_value < 0.01) ?
+                    "> $0.00" :
+                    `$${total_value.toFixed(2)}`
     var total = $("tfoot > tr > .value").text(formatted)
 }
 
@@ -234,7 +237,7 @@ var priceChange = e => {
         _state.value = (_state.amount * _state.price).toFixed(2)
 
         // Update element
-        $(`#${coin} > .value`).text(`$${_state.value}`)
+        $(`#${coin} > .value`).text(`${_state.value}`)
 
         updateTotal()
         updatePriceServer(coin, _state.price)
