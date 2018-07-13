@@ -209,7 +209,7 @@ var amountChange = e => {
 
         // Update state
         var _state = state.wallets.filter(({pair}) => pair == coin)[0]
-        _state.amount = e.valueAsNumber
+        _state.amount = e.valueAsNumber || 0
         _state.value = (_state.amount * _state.price).toFixed(2)
 
         // Update element
@@ -226,7 +226,7 @@ var priceChange = e => {
 
         // Update state
         var _state = state.wallets.filter(({pair}) => pair == coin)[0]
-        _state.price = e.valueAsNumber
+        _state.price = e.valueAsNumber || 0
         _state.value = (_state.amount * _state.price).toFixed(2)
 
         // Update element
