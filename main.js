@@ -66,6 +66,7 @@ var autocompleteInit = () => {
         suggestion: typeaheadSuggestion
       }
     }).on("typeahead:selected", addToWallet)
+      .on("typeahead:selected", () => $("#search").typeahead('val', ''))
       .on('keyup', this, function (event) {
             if (event.keyCode == 13) {
                 $('.tt-selectable').first().trigger('click')
