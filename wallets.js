@@ -106,11 +106,11 @@ var addToWallet = (_, {custom, name}) => {
 }
 
 var amountInput = (amount) => {
-    return `<input type="number" class="form-control" value="${amount}" step="0.1" min="0" oninput="amountChange(this)">`
+    return `<input type="number" class="form-control" value="${amount}" step="0.1" min="0" max="999999" oninput="amountChange(this)">`
 }
 
 var priceInput = (price) => {
-    return `<input type="number" class="form-control" value="${price}" step="0.01" min="0" oninput="priceChange(this)">`
+    return `<input type="number" class="form-control" value="${price}" step="0.01" min="0" max="999999" oninput="priceChange(this)">`
 }
 
 var addRow = ({pair, amount, price, value, custom}, table) => {
@@ -204,6 +204,8 @@ var updatePriceServer = (coin, price) => {
 
 var amountChange = e => {
 
+        if (e.valueAsNumber > 999999) return
+
         // Get element
         var coin = e.parentElement.parentElement.id
 
@@ -221,6 +223,8 @@ var amountChange = e => {
 
 var priceChange = e => {
 
+        if (e.valueAsNumber > 999999) return
+        
         // Get element
         var coin = e.parentElement.parentElement.id
 
