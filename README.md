@@ -6,6 +6,8 @@ BUGS:
 [x] Server crashes when client opened in second browser
 [x] Deleted custom coins appear in typeahead
 [ ] Pairs being disapearing from state.pairs (How to reproduce?)
+[ ] Cookie/url priority is inverted (?)
+[ ] Custom coins in Summary
 
 IDEADS:
 * crypto headlines in the navbar with links
@@ -19,7 +21,7 @@ TODO in order of priority:
     [ ] Navbar
         [ ] Hamburger
             [x] Mutually exclusive to sidebar
-            [ ] Button styling
+            [x] Button styling
             [x] Automatic close
         [x] Animate Wallet item when visible, otherwise hamburger button
     [ ] Header
