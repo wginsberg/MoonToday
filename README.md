@@ -19,7 +19,7 @@ TODO in order of priority:
     [ ] Hamburger menu
         [x] Mutually exclusive to sidebar
         [ ] Button styling
-        [ ] Automatic close
+        [x] Automatic close
     [ ] Header
         [ ] Home button styling
 [ ] Chrome support

@@ -102,6 +102,7 @@ var navigate = (page) => {
 
     $(".nav-link").removeClass("active")
     $(`#${page}`).addClass("active")
+    $("#navigation").removeClass("show")
 
     // Update state
 
