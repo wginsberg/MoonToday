@@ -16,10 +16,12 @@ TODO in order of priority:
         [ ] Succinct headers
         [ ] Remove Unit price column
         [ ] Smaller delete button
-    [ ] Hamburger menu
-        [x] Mutually exclusive to sidebar
-        [ ] Button styling
-        [x] Automatic close
+    [ ] Navbar
+        [ ] Hamburger
+            [x] Mutually exclusive to sidebar
+            [ ] Button styling
+            [x] Automatic close
+        [x] Animate Wallet item when visible, otherwise hamburger button
     [ ] Header
         [ ] Home button styling
 [ ] Chrome support

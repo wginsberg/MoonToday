@@ -93,12 +93,15 @@ var addToWallet = (_, {custom, name}) => {
         add_coin_to_server(pair, custom)
         state.pairs.splice(state.pairs.indexOf(pair), 1)
         
-        // Animate navbar link
-        var navbar_link = document.getElementById("wallets") 
-        navbar_link.addEventListener("animationend",
+        // Animate navbar link or humburger button
+        var to_animate = $("#navigation:visible").length ?
+                         document.getElementById("wallets") :
+                         document.getElementById("hamburger")
+                         
+        to_animate.addEventListener("animationend",
                                      (e) => e.target.classList.remove("stretched"),
                                      false)
-        navbar_link.classList.add("stretched")
+        to_animate.classList.add("stretched")
 
         // Enable insights navbar link
         if (!custom) enableInsights()
