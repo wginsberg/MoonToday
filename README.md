@@ -5,11 +5,28 @@ BUGS:
 [x] Update total on wallet delete
 [x] Server crashes when client opened in second browser
 [x] Deleted custom coins appear in typeahead
+[ ] Pairs being disapearing from state.pairs (How to reproduce?)
 
 IDEADS:
 * crypto headlines in the navbar with links
 
 TODO in order of priority:
+[ ] Clean, responsive layout
+    [ ] Wallet table
+        [ ] Succinct headers
+        [ ] Remove Unit price column
+        [ ] Smaller delete button
+    [ ] Hamburger menu
+        [x] Mutually exclusive to sidebar
+        [ ] Button styling
+        [ ] Automatic close
+    [ ] Header
+        [ ] Home button styling
+[ ] Chrome support
+[ ] About page
+[ ] Help page
+[ ] Safari support
+[ ] Edge support
 [x] Set a default set of coins for new user
 [x] Transform coinpair list to just be a list of coins, with everything using USD
 [x] Proper layout of main page on mobile
@@ -23,9 +40,6 @@ TODO in order of priority:
 [x] Adding wallet should trigger re-render of charts
 [x] Tables report small values as > 0 instead of simply rounding to 0
 [x] Disable graph for custom coins
-[ ] Portfolio stats on insights page
 [x] Enter key should work on search bar
-* Better loading animation for Insights
-* Recaptcha
 * Routing
 * Serverside computation of graph data for insights so that loading time is reasonable
