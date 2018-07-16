@@ -112,8 +112,14 @@ var addToWallet = (_, {custom, name}) => {
 }
 
 var nameElement = (pair, custom) => {
-    const name_a = `<a href="#" onclick="wallet_modal(this)">${pair}</a>`
-    const name_p = `<p>${pair}</p>`
+    // How to display name on a tiny display
+    var tiny = pair.length > 9 ? pair.substring(0, 6) + "..." : pair
+
+    const inner = `<span class="d-none d-sm-inline">${pair}</span>
+                   <span class="d-sm-none">${tiny}</span>`
+
+    const name_a = `<a href="#" onclick="wallet_modal(this)">${inner}</a>`
+    const name_p = `<p>${inner}</p>`
     var name_element = custom ? name_p : name_a
     return name_element
 }

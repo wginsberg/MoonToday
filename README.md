@@ -15,9 +15,9 @@ IDEADS:
 TODO in order of priority:
 [ ] Clean, responsive layout
     [ ] Wallet table
-        [ ] Succinct headers
+        [x] Succinct headers
         [ ] Remove Unit price column
-        [ ] Smaller delete button
+        [x] Smaller delete button
     [ ] Navbar
         [ ] Layout, padding on smaller screens
         [ ] Max height on large screens, for border
