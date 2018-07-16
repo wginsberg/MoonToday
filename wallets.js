@@ -46,17 +46,23 @@ var table_scoffolding = `<table class="table table-striped table-sm">
                             <thead>
                                 <tr>
                                     <th>Coin</th>
-                                    <th width=40 border=0px></th>
+                                    <th class="delete" width=40 border=0px></th>
                                     <th>Amount</th>
-                                    <th>Unit Price ($)</th>
-                                    <th>Value ($)</th>
+                                    <th>
+                                        <span class="d-none d-sm-inline">Unit Price ($)</span>
+                                        <span class="d-sm-none">Price</span>
+                                    </th>
+                                    <th>
+                                        <span class="d-none d-sm-inline">Value ($)</span>
+                                        <span class="d-sm-none">Value</span>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody id="coins"></tbody>
                             <tfoot>
                                 <tr>
                                     <th>Total</th>
-                                    <th></th>
+                                    <th class="delete"></th>
                                     <th></th>
                                     <th></th>
                                     <th class="value">-</th>
@@ -105,6 +111,13 @@ var addToWallet = (_, {custom, name}) => {
     }
 }
 
+var nameElement = (pair, custom) => {
+    const name_a = `<a href="#" onclick="wallet_modal(this)">${pair}</a>`
+    const name_p = `<p>${pair}</p>`
+    var name_element = custom ? name_p : name_a
+    return name_element
+}
+
 var amountInput = (amount) => {
     return `<input type="number" class="form-control" value="${amount}" step="0.1" min="0" max="999999" oninput="amountChange(this)">`
 }
@@ -120,14 +133,10 @@ var addRow = ({pair, amount, price, value, custom}, table) => {
     price = isFinite(price) ? price : ''
     value = isFinite(value) ? value : ''
 
-    const name_a = `<a href="#" onclick="wallet_modal(this)">${pair}</a>`
-    const name_p = `<p>${pair}</p>`
-    var name_element = custom ? name_p : name_a
-
     table.append(`
         <tr class="coin" id="${pair}">
-            <td>${name_element}</td>
-            <td><button onclick="remove_coin('${pair}')"><i class="fa fa-trash"></i></button></td>
+            <td>${nameElement(pair, custom)}</td>
+            <td class="delete"><button onclick="remove_coin('${pair}')"><i class="fa fa-trash"></i></button></td>
             <td>${amountInput(amount)}</td>
             <td class="price">${custom ? priceInput(price) : price}</td>
             <td class="value">${Number(value).toFixed(2)}</td>

@@ -5,9 +5,9 @@ BUGS:
 [x] Update total on wallet delete
 [x] Server crashes when client opened in second browser
 [x] Deleted custom coins appear in typeahead
-[ ] Pairs being disapearing from state.pairs (How to reproduce?)
 [x] Cookie/url priority is inverted (?)
-[ ] Custom coins in Summary
+[ ] Pairs being disapearing from state.pairs (How to reproduce?)
+[ ] Custom coins in Summary (How to reproduce?)
 
 IDEADS:
 * crypto headlines in the navbar with links

@@ -1,6 +1,11 @@
 /*
- * Wallet modal
+ * Wallet
  */
+@media (max-width: 320px) {
+    .delete {
+        display: none;
+    }
+}
 .modal .modal-dialog .modal-content {
     height: 300px;
     width: 100%;
