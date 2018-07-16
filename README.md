@@ -23,6 +23,7 @@ TODO in order of priority:
             [x] Mutually exclusive to sidebar
             [x] Button styling
             [x] Automatic close
+            [x] Smaller on tiny screens
         [x] Animate Wallet item when visible, otherwise hamburger button
     [ ] Header
         [ ] Home button styling
