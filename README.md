@@ -6,7 +6,7 @@ BUGS:
 [x] Server crashes when client opened in second browser
 [x] Deleted custom coins appear in typeahead
 [ ] Pairs being disapearing from state.pairs (How to reproduce?)
-[ ] Cookie/url priority is inverted (?)
+[x] Cookie/url priority is inverted (?)
 [ ] Custom coins in Summary
 
 IDEADS:
@@ -19,6 +19,8 @@ TODO in order of priority:
         [ ] Remove Unit price column
         [ ] Smaller delete button
     [ ] Navbar
+        [ ] Layout, padding on smaller screens
+        [ ] Max height on large screens, for border
         [ ] Hamburger
             [x] Mutually exclusive to sidebar
             [x] Button styling

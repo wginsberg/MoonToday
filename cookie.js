@@ -1,26 +1,25 @@
+var userid = undefined
+
+function get_userid () {
+    return userid
+}
+
 function get_cookie() {
     var userID = document.cookie.replace(/(?:(?:^|.*;\s*)userID\s*\=\s*([^;]*).*$)|^.*$/, "$1")
     return userID
 }
 
-function set_cookie(userid="") {
-    if (userid == "") {
-        userid = make_id()
-    }
-    var cookie = 'userID' + "=" + userid + ";"
-    document.cookie = cookie
+function set_cookie(c) {
+    document.cookie = 'userID' + "=" + c + ";"
 }
 
 function get_url_param() {
-    var url_string = window.location.href
-    var url = new URL(url_string)
-    var c = url.searchParams.get("userid")
-    return c
+    return window.location.hash.replace("#userid=", "")
 }
 
-function set_url_param() {
-    var cookie = get_cookie()
-    window.location.href = window.location.href + '?userid=' + cookie
+function set_url_param(cookie) {
+    console.log(`set url hash: ${cookie}`)
+    window.location.hash = 'userid=' + cookie
 }
 
 function make_id() {
@@ -37,14 +36,19 @@ function make_id() {
 function init_cookie() {
     var param = get_url_param()
     var cookie = get_cookie()
-    if (param !== null) {
-        set_cookie(param)
-    }
-    else if (cookie != "") {
-        set_url_param()
+
+    console.log(`found url param ${param}`)
+    console.log(`found cookie ${cookie}`)
+
+    if (param) {
+        userid = param
+    } else if (cookie != "") {
+        set_url_param(cookie)
+        userid = cookie
     } else {
-        set_cookie()
-        set_url_param()
+        userid = make_id()
+        set_cookie(userid)
+        set_url_param(userid)
     }
 }
 

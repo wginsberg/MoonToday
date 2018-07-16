@@ -38,8 +38,7 @@ var wallets = function () {
                 .map((item) => get_price(item['pair'], item['amount']))
         }
     }
-    var url = window.location.href.split('?')[0]
-    xhr.open("GET", `${url}wallets/${get_cookie()}`);
+    xhr.open("GET", `${base_url}/wallets/${get_userid()}`);
     xhr.send();
 }
 
@@ -67,9 +66,7 @@ var table_scoffolding = `<table class="table table-striped table-sm">
 
 var add_coin_to_server = (coin, custom) => {
     xhr = new XMLHttpRequest();
-    var url = window.location.href.split('?')[0]
-    xhr.open("PUT",
-             `${url}wallets/${get_cookie()}/${coin}`);
+    xhr.open("PUT", `${base_url}/wallets/${get_userid()}/${coin}`);
     xhr.send(custom ? true : '');
 }
 
@@ -195,16 +192,14 @@ var updateTotal = () => {
 }
 
 var updateAmountServer = (coin, amount) => {
-    var url = window.location.href.split('?')[0]
     xhr = new XMLHttpRequest();
-    xhr.open("PUT", `${url}wallets/${get_cookie()}/${coin}/amount/`);
+    xhr.open("PUT", `${base_url}/wallets/${get_userid()}/${coin}/amount/`);
     xhr.send(amount);
 }
 
 var updatePriceServer = (coin, price) => {
-    var url = window.location.href.split('?')[0]
     xhr = new XMLHttpRequest();
-    xhr.open("PUT", `${url}wallets/${get_cookie()}/${coin}/price/`);
+    xhr.open("PUT", `${base_url}/wallets/${get_userid()}/${coin}/price/`);
     xhr.send(price);
 }
 
@@ -249,9 +244,7 @@ var priceChange = e => {
 var remove_coin = (pair) => {
     // Remove from database
     xhr = new XMLHttpRequest();
-    var url = window.location.href.split('?')[0]
-    xhr.open("DELETE",
-             `${url}wallets/${get_cookie()}/${pair}`);
+    xhr.open("DELETE", `${base_url}/wallets/${get_userid()}/${pair}`);
     xhr.send();
 
     // Update state

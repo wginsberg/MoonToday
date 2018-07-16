@@ -1,5 +1,7 @@
 const PAIR_AGGREGATE = "Portfolio"
 
+const base_url = `${window.location.protocol}\/\/${window.location.host}`
+
 var state = {
     currentPage: "wallets",
     currentPair: "",
