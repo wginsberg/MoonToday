@@ -1,3 +1,8 @@
+IN PROGRESS:
+    * Making the table nicer and responsiver
+    * The name column should be fixed and the rest of the table scrollable on mobile
+    * On mobile, make sure there's no whitespace at the bottom to avoid weirdness
+
 BUGS:
 [x] NaN in Insights chart
 [x] Default coins still appear in typeahead
@@ -15,8 +20,9 @@ IDEADS:
 TODO in order of priority:
 [ ] Clean, responsive layout
     [ ] Wallet table
+        [ ] Fill screen without extra space
+        [ ] Fix first column to make scrolling nice
         [x] Succinct headers
-        [ ] Remove Unit price column
         [x] Smaller delete button
     [ ] Navbar
         [ ] Layout, padding on smaller screens

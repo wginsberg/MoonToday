@@ -18,7 +18,8 @@ var wallets = function () {
             // setup table
             spinner.stop()
             var table = $(table_scoffolding)
-            
+            var tbody = table.find("#coins")
+
             // add rows
             for(item of json){
                 var coin = item['pair']
@@ -27,7 +28,7 @@ var wallets = function () {
                 if (custom) {
                     item['value'] = (item['amount'] * item['price']).toFixed(2)
                 }
-                addRow(item, table)
+                addRow(item, tbody)
                 state.wallets.push(item)
             }
             $("#walletsView").append(table)
@@ -45,7 +46,7 @@ var wallets = function () {
 var table_scoffolding = `<table class="table table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th>Coin</th>
+                                    <th class="name-col">Coin</th>
                                     <th class="delete" width=40 border=0px></th>
                                     <th>Amount</th>
                                     <th>
@@ -61,7 +62,7 @@ var table_scoffolding = `<table class="table table-striped table-sm">
                             <tbody id="coins"></tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Total</th>
+                                    <th class="name-col">Total</th>
                                     <th class="delete"></th>
                                     <th></th>
                                     <th></th>
@@ -141,7 +142,7 @@ var addRow = ({pair, amount, price, value, custom}, table) => {
 
     table.append(`
         <tr class="coin" id="${pair}">
-            <td>${nameElement(pair, custom)}</td>
+            <td class="name-col">${nameElement(pair, custom)}</td>
             <td class="delete"><button onclick="remove_coin('${pair}')"><i class="fa fa-trash"></i></button></td>
             <td>${amountInput(amount)}</td>
             <td class="price">${custom ? priceInput(price) : price}</td>
