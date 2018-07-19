@@ -19,8 +19,9 @@ var insights = (hours) => {
 }
 
 var wallet_modal = (event) => {
-    
-    state.currentPair = event.text 
+
+    var pair = event.text.split(/\s/)[0]    
+    state.currentPair = pair
     
     $("#dialogBox").dialog({
         open: (event, ui) => {

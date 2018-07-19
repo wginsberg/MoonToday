@@ -6,7 +6,7 @@ BUGS:
 [x] Server crashes when client opened in second browser
 [x] Deleted custom coins appear in typeahead
 [x] Cookie/url priority is inverted (?)
-[ ] Modal chart not displaying
+[x] Modal chart not displaying
 [ ] Pairs being disapearing from state.pairs (How to reproduce?)
 [ ] Custom coins in Summary (How to reproduce?)
 
