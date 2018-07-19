@@ -1,52 +1,31 @@
-BUGS:
-[x] NaN in Insights chart
-[x] Default coins still appear in typeahead
-[x] Broken typeahead
-[x] Update total on wallet delete
-[x] Server crashes when client opened in second browser
-[x] Deleted custom coins appear in typeahead
-[x] Cookie/url priority is inverted (?)
-[ ] Modal chart not displaying
-[ ] Pairs being disapearing from state.pairs (How to reproduce?)
-[ ] Custom coins in Summary (How to reproduce?)
+# MoonToday
 
-IDEADS:
-* crypto headlines in the navbar with links
+MoonToday is a tool for managing your cryptocurrency asset portfolio.
 
-TODO in order of priority:
-[ ] Clean, responsive layout
-    [ ] Wallet table
-        [x] Succinct headers
-        [x] Smaller delete button
-    [ ] Navbar
-        [ ] Layout, padding on smaller screens
-        [ ] Max height on large screens, for border
-        [x] Hamburger
-            [x] Mutually exclusive to sidebar
-            [x] Button styling
-            [x] Automatic close
-            [x] Smaller on tiny screens
-        [x] Animate Wallet item when visible, otherwise hamburger button
-    [ ] Header
-        [ ] Home button styling
-[ ] Chrome support
-[ ] About page
-[ ] Help page
-[ ] Safari support
-[ ] Edge support
-[x] Set a default set of coins for new user
-[x] Transform coinpair list to just be a list of coins, with everything using USD
-[x] Proper layout of main page on mobile
-[x] Insights button takes you to a portfolio aggregate chart
-[x] Clicking on a wallet brings up a coin insight in a modal window
-[x] Biggest movers on insights page
-[x] Add loading animation for wallets page
-[x] Spinners on insights page
-[x] Change disabled feature logic: Allow insights only with a non-zero number of non-custom wallets, summary only with non-zero portfolio total
-[x] Disable 'Biggest Movers' When there are fewer than 3 wallets
-[x] Adding wallet should trigger re-render of charts
-[x] Tables report small values as > 0 instead of simply rounding to 0
-[x] Disable graph for custom coins
-[x] Enter key should work on search bar
-* Routing
-* Serverside computation of graph data for insights so that loading time is reasonable
+![Moon Today main view](/screenshots/home.png)
+
+## Quickstart
+
+Visit the [live instance](http://moontoday) or follow the instructions below to spin up an instance.
+
+1) Install dependencies
+`npm install`
+
+2) Initialize database
+`node init.js`
+
+3) Start the server
+`node server.js`
+
+4) Navigate to 
+`localhost:3000`
+
+## Features
+
+### Portfolio summary
+
+![Summary view](screenshots/summary.png)
+
+### Market insights
+
+![Insights view](screenshots/insights.png)
