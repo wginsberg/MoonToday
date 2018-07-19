@@ -6,7 +6,7 @@ app.use(bodyParser.text());
 
 // Setup sqlite
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('MoonToday');
+const db = new sqlite3.Database('MoonToday.db');
 
 // Helper functions
 
@@ -103,23 +103,23 @@ app.put('/wallets/:userid/:name/amount', updateWallet)
 app.put('/wallets/:userid/:name/price', updatePair)
 app.delete('/wallets/:userid/:name', removePair)
 
-// Supply javascript to the client. Can this be cleaner?
+// Supply javascript
 app.get('/js/spin.js', (req, res) => res.sendFile(__dirname + '/js/spin.js'))
-app.get('/js/spin.css', (req, res) => res.sendFile(__dirname + '/js/spin.css'))
 app.get('/js/typeahead.bundle.min.js', (req, res) => res.sendFile(__dirname + '/js/typeahead.bundle.min.js'))
 app.get('/js/jquery-3.3.1.min.js', (req, res) => res.sendFile(__dirname + '/js/jquery-3.3.1.min.js'))
 app.get('/js/jquery-ui.js', (req, res) => res.sendFile(__dirname + '/js/jquery-ui.js'))
 app.get('/js/bootstrap.min.js', (req, res) => res.sendFile(__dirname + '/js/bootstrap.min.js'))
-app.get('/main.js', (req, res) => res.sendFile(__dirname + '/main.js'))
-app.get('/wallets.js', (req, res) => res.sendFile(__dirname + '/wallets.js'))
-app.get('/doughnutChart.js', (req, res) => res.sendFile(__dirname + '/doughnutChart.js'))
-app.get('/insights.js', (req, res) => res.sendFile(__dirname + '/insights.js'))
-app.get('/market.js', (req, res) => res.sendFile(__dirname + '/market.js'))
-app.get('/cookie.js', (req, res) => res.sendFile(__dirname + '/cookie.js'))
+app.get('/main.js', (req, res) => res.sendFile(__dirname + '/js/MoonToday/main.js'))
+app.get('/wallets.js', (req, res) => res.sendFile(__dirname + '/js/MoonToday/wallets.js'))
+app.get('/doughnutChart.js', (req, res) => res.sendFile(__dirname + '/js/MoonToday/doughnutChart.js'))
+app.get('/insights.js', (req, res) => res.sendFile(__dirname + '/js/MoonToday/insights.js'))
+app.get('/market.js', (req, res) => res.sendFile(__dirname + '/js/MoonToday/market.js'))
+app.get('/cookie.js', (req, res) => res.sendFile(__dirname + '/js/MoonToday/cookie.js'))
 
 // Supply styles
-app.get('/style.css', (req, res) => res.sendFile(__dirname + '/style.css'))
-app.get('/graph_style.css', (req, res) => res.sendFile(__dirname + '/graph_style.css'))
+app.get('/style.css', (req, res) => res.sendFile(__dirname + '/css/style.css'))
+app.get('/graph_style.css', (req, res) => res.sendFile(__dirname + '/css/graph_style.css'))
+app.get('/css/spin.css', (req, res) => res.sendFile(__dirname + '/css/spin.css'))
 
 // Supply images
 app.get('/img/moon.gif', (req, res) => res.sendFile(__dirname + '/img/moon.gif'))

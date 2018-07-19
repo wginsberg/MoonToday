@@ -1,5 +1,5 @@
 node_modules/*
-MoonToday
+MoonToday.db
 *.swp
 .DS_Store
 MoonToday.pem
