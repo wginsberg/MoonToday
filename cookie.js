@@ -18,7 +18,6 @@ function get_url_param() {
 }
 
 function set_url_param(cookie) {
-    console.log(`set url hash: ${cookie}`)
     window.location.hash = 'userid=' + cookie
 }
 
@@ -36,9 +35,6 @@ function make_id() {
 function init_cookie() {
     var param = get_url_param()
     var cookie = get_cookie()
-
-    console.log(`found url param ${param}`)
-    console.log(`found cookie ${cookie}`)
 
     if (param) {
         userid = param

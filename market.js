@@ -1,5 +1,4 @@
 var make_request = (url, callback) => {
-    console.log(url)
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
