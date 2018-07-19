@@ -92,27 +92,27 @@ var render_insights_chart = (chart, data_pts, pair, data) => {
     }
 
     var table_scaffolding = `
-        <h4 id='market_title' class='title'>Biggest Movers</h4>
         <table class="table table-striped table-sm">
+          <h4 id='market_title' class='title'>Biggest Movers</h4>
           <thead>
               <tr>
                   <th>Coin</th>
-                  <th>Start</th>
-                  <th>End</th>
+                  <th class="d-none d-sm-table-cell">Start</th>
+                  <th class="d-none d-sm-table-cell">End</th>
                   <th>Change</th>
               </tr>
           </thead>
           <tbody>
               <tr id="insight-up">
                   <td></td>
-                  <td></td>
-                  <td></td>
+                  <td class="d-none d-sm-table-cell"></td>
+                  <td class="d-none d-sm-table-cell"></td>
                   <td></td>
               </tr>
               <tr id="insight-down">
                   <td></td>
-                  <td></td>
-                  <td></td>
+                  <td class="d-none d-sm-table-cell"></td>
+                  <td class="d-none d-sm-table-cell"></td>
                   <td></td>
               </tr>
           </tbody>

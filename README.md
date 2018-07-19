@@ -16,12 +16,11 @@ TODO in order of priority:
 [ ] Clean, responsive layout
     [ ] Wallet table
         [x] Succinct headers
-        [ ] Remove Unit price column
         [x] Smaller delete button
     [ ] Navbar
         [ ] Layout, padding on smaller screens
         [ ] Max height on large screens, for border
-        [ ] Hamburger
+        [x] Hamburger
             [x] Mutually exclusive to sidebar
             [x] Button styling
             [x] Automatic close
