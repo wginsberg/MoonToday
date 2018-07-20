@@ -2,7 +2,10 @@
 
 MoonToday is a tool for managing your cryptocurrency asset portfolio.
 
-![Moon Today main view](/screenshots/home.png)
+<p align="center">
+<img src="/screenshots/home.png" width="80%" >
+<img src="/screenshots/mobile.png" width="30%" >
+</p>
 
 ## Quickstart
 
