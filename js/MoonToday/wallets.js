@@ -77,7 +77,7 @@ var add_coin_to_server = (coin, custom) => {
 }
 
 var addToWallet = (_, {custom, name}) => {
-    var pair = name || $("#search")[0].value
+    var pair = name || $("#search")[0].value.replace(/\s+/g, "-")
     // Avoid duplicates
     if (!state.wallets.filter((wallet) => wallet.pair == pair).length) {
         if (custom) {
