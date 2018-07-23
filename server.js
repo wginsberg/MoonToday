@@ -1,3 +1,6 @@
+const https = require('https');
+const fs = require('fs');
+
 // Setup express
 const express = require('express')
 const app = express()
@@ -127,8 +130,22 @@ app.get('/img/rollercoaster.gif', (req, res) => res.sendFile(__dirname + '/img/r
 app.get('/img/rollercoaster2.gif', (req, res) => res.sendFile(__dirname + '/img/rollercoaster2.gif'))
 app.get('/img/ethereum.gif', (req, res) => res.sendFile(__dirname + '/img/ethereum.gif'))
 
-// Certbot
+app.listen(3000, () => console.log('Server listening on port 3000!'))
+
+// HTTPS
 app.use(express.static('static'))
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+var startHttps = () => {
+    console.log('Server listening on port 8443')
+    const https_options = {
+        cert: fs.readFileSync('./sslcert/fullchain.pem'),
+        key: fs.readFileSync('./sslcert/privkey.pem')
+    };
+    https.createServer(https_options, app).listen(8443);
+}
+
+fs.access('./sslcert/fullchain.pem',
+          fs.constants.F_OK,
+          (err) => { if (!err) startHttps(); }
+);
 
