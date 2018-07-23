@@ -127,5 +127,8 @@ app.get('/img/rollercoaster.gif', (req, res) => res.sendFile(__dirname + '/img/r
 app.get('/img/rollercoaster2.gif', (req, res) => res.sendFile(__dirname + '/img/rollercoaster2.gif'))
 app.get('/img/ethereum.gif', (req, res) => res.sendFile(__dirname + '/img/ethereum.gif'))
 
+// Certbot
+app.use(express.static('static'))
+
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
