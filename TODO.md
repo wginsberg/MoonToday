@@ -1,3 +1,9 @@
+IN PROGRESS:
+    * https
+    * working on live instance
+    * needs to document steps for reproducability ...
+    * need to merge into master
+
 BUGS:
 [x] NaN in Insights chart
 [x] Default coins still appear in typeahead
