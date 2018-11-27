@@ -1,0 +1,8 @@
+# Set up environment
+export SQL_CONNECTION_NAME=
+
+export SQL_USER=
+export PGPASSWORD=
+export SQL_DATABASE=
+export SQL_PORT=
+
