@@ -118,10 +118,6 @@ app.delete('/wallets/:userid/:name', removePair)
 
 // Supply javascript
 app.get('/js/spin.js', (req, res) => res.sendFile(__dirname + '/js/spin.js'))
-app.get('/js/typeahead.bundle.min.js', (req, res) => res.sendFile(__dirname + '/js/typeahead.bundle.min.js'))
-app.get('/js/jquery-3.3.1.min.js', (req, res) => res.sendFile(__dirname + '/js/jquery-3.3.1.min.js'))
-app.get('/js/jquery-ui.js', (req, res) => res.sendFile(__dirname + '/js/jquery-ui.js'))
-app.get('/js/bootstrap.min.js', (req, res) => res.sendFile(__dirname + '/js/bootstrap.min.js'))
 app.get('/main.js', (req, res) => res.sendFile(__dirname + '/js/MoonToday/main.js'))
 app.get('/wallets.js', (req, res) => res.sendFile(__dirname + '/js/MoonToday/wallets.js'))
 app.get('/doughnutChart.js', (req, res) => res.sendFile(__dirname + '/js/MoonToday/doughnutChart.js'))
