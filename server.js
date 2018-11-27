@@ -39,9 +39,9 @@ const knex = Knex({
 
 // Helper functions
 
-var validateUser = (userid) => knex('user').where('userid', userid)
+var validateUser = (userid) => knex('users').where('userid', userid)
 
-var addUser = (userid) => knex('user').insert({userid: userid}).then(() => userid)
+var addUser = (userid) => knex('users').insert({userid: userid}).then(() => userid)
 
 
 var insertDefaultWallets = (userid) => {

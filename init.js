@@ -28,10 +28,10 @@ const knex = Knex({
     connection: config
 });
 
-knex.schema.hasTable('user')
+knex.schema.hasTable('users')
     .then(function(exists) {
       if (!exists) {
-        return knex.schema.createTable('user', function(t) {
+        return knex.schema.createTable('users', function(t) {
           t.text('userid');
         }).createTable('wallet', (t) => {
             t.text('userid');

@@ -8,7 +8,7 @@ Copy `environ.template` to `environ` and add correct password, user, database, e
 
 Initialize environment variables:
 
-```source gcp/environ```
+```source environ```
 
 Start the proxy:
 ```./sql_proxy.sh```
