@@ -3,3 +3,5 @@ MoonToday.db
 *.swp
 .DS_Store
 MoonToday.pem
+app.standard.yaml
+
