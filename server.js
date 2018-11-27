@@ -4,91 +4,104 @@ const app = express()
 const bodyParser = require('body-parser');
 app.use(bodyParser.text());
 
-// Setup sqlite
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('MoonToday.db');
+// Setup knex
+const local = process.argv[2] == "--local"
+
+const Knex = require('knex');
+
+const configs = {
+    postgres : {
+      user: process.env.SQL_USER,
+      password: process.env.SQL_PASSWORD,
+      database: process.env.SQL_DATABASE,
+      port: process.env.SQL_PORT
+    },
+    sqlite3 : {
+        filename: 'MoonToday.db'
+    }
+}
+
+const client = local ? "sqlite3" : "postgres"
+const config = configs[client]
+
+if (!local) {
+    if (process.env.INSTANCE_CONNECTION_NAME && process.env.NODE_ENV === 'production') {
+        config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
+    }
+}
+
+const knex = Knex({
+    client: client,
+    connection: config,
+    debug: true
+});
+
 
 // Helper functions
 
-var validateUser = (userid, cb) => {
-    var query = "SELECT * FROM user WHERE userid == ?"
-    db.all(query, [userid], cb)
-}
+var validateUser = (userid) => knex('user').where('userid', userid)
 
-var addUser = (userid, cb) => {
-    var query = "INSERT INTO user VALUES (?)"
-    db.all(query,
-           [userid],
-           insertDefaultWallets(userid, cb))
-}
+var addUser = (userid) => knex('user').insert({userid: userid}).then(() => userid)
 
-var insertWallet = (params, callback) => {
-    var query = "INSERT INTO wallet (userid, pair, custom) VALUES (?, ?, ?)"
-    db.all(query, params, callback)
-}
 
-var insertDefaultWallets = (userid, cb) => {
-    insertWallet([userid, "BTCUSD", false])
-    insertWallet([userid, "ETHUSD", false])
-    insertWallet([userid, "LTCUSD", false], cb)
+var insertDefaultWallets = (userid) => {
+    console.log(userid)
+    return knex('wallet').insert([{userid: userid, pair: "BTCUSD", custom: false},
+                                  {userid: userid, pair: "ETHUSD", custom: false},
+                                  {userid: userid, pair: "LTCUSD", custom: false}])
+                         .then(() => userid)
 }
 
 // CRUD operations
 
 var getWallets = (req, res) => {
     
-    var finish = (err, rows) => {
-        if (err) {
-            console.log(err)
-            res.sendStatus(500)
-        } else {
-            res.send(rows)
-        }
-    }
+    var handleUser = () => knex('wallet').where('userid', req.params.userid)
 
-    var handleUser = () => {
-        var query = "SELECT * FROM wallet WHERE userid == ?"
-        var params = [req.params.userid]
-        db.all(query, params, finish)
-    }
+    var handleNewUser = () => addUser(req.params.userid)
+        .then(insertDefaultWallets)
+        .then(handleUser)
 
-    var handleNewUser = () => {
-        addUser(req.params.userid, handleUser)
-    }
-
-    validateUser(req.params.userid,
-                 (err, result) => result.length ? handleUser() : handleNewUser())
+    validateUser(req.params.userid)
+        .then((result) => result.length ? handleUser() : handleNewUser())
+        .then(res.send.bind(res))
+        .catch((error) => {console.log(error); res.sendStatus(500)})
 };
 
 var addWallet = (req, res) => {
-    var params = [req.params.userid, req.params.name, Boolean(req.body.length)]
-    var callback = (err) => {
-        if (err) console.log(err)
-        res.sendStatus(err ? 500 : 200)
+    var params = {
+        userid: req.params.userid,
+        pair: req.params.name,
+        custom: Boolean(req.body.length)
     }
-    insertWallet(params, callback)
+    knex('wallet').insert(params)
+        .then(res.send.bind(res))
+        .catch((error) => {console.log(error); res.sendStatus(500)})
 }
 
 var removePair = (req, res) => {
-    var query = "DELETE FROM wallet WHERE pair == ? AND userid == ?"
-    var params = [req.params.name, req.params.userid]
-    var callback = (err) => res.sendStatus(err ? 500 : 200)
-    db.run(query, params, callback)
+    knex('wallet').where({pair: req.params.name, userid: req.params.userid})
+        .del()
+        .then(() => undefined)
+        .then(res.send.bind(res))
+        .catch((error) => {console.log(error); res.sendStatus(500)})
 }
 
 var updateWallet = (req, res) => {
-    var query = "UPDATE wallet SET amount = ? WHERE pair == ? AND userid == ?"
-    var params = [req.body, req.params.name, req.params.userid]
-    var callback = (err) => res.sendStatus(err ? 500 : 200)
-    db.run(query, params, callback)
+    knex('wallet').where({pair: req.params.name, userid: req.params.userid})
+        .update('amount', req.body) 
+        .then(() => undefined)
+        .then(res.send.bind(res))
+        .catch((error) => {console.log(error); res.sendStatus(500)})
 }
 
 // TODO track the price history of custom pairs
 var updatePair = (req, res) => {
-    var query = "UPDATE wallet SET price = ? WHERE pair == ? and userid == ?"
-    var params = [req.body, req.params.name, req.params.userid]
-    var callback = (err) => res.sendStatus(err ? 500 : 200)
-    db.run(query, params, callback)
+    knex('wallet').where({pair: req.params.name, userid: req.params.userid})
+        .update('price', req.body)
+        .then(() => undefined)
+        .then(res.send.bind(res))
+        .catch((error) => {console.log(error); res.sendStatus(500)})
 }
 
 app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
