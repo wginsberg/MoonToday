@@ -1,5 +1,3 @@
-const local = process.argv[2] == "--local"
-
 const Knex = require('knex');
 
 const configs = {
@@ -14,13 +12,12 @@ const configs = {
     }
 }
 
-const client = local ? "sqlite3" : "postgres"
+const production = process.env.NODE_ENV = 'prodcution'
+const client = production || proces.argv[3] == '--cloud-sql' ? 'postgres' : 'sqlite3'
 const config = configs[client]
 
-if (!local) {
-    if (process.env.INSTANCE_CONNECTION_NAME && process.env.NODE_ENV === 'production') {
-        config.socketPath = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
-    }
+if (production) {
+    config.host = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
 }
 
 const knex = Knex({

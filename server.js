@@ -5,8 +5,6 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.text());
 
 // Setup knex
-const local = process.argv[2] == "--local"
-
 const Knex = require('knex');
 
 const configs = {
@@ -21,19 +19,17 @@ const configs = {
     }
 }
 
-const client = local ? "sqlite3" : "postgres"
+const production = process.env.NODE_ENV = 'production'
+const client = production || process.argv[3] == "--cloud-sql" ? 'postgres' : 'sqlite3'
 const config = configs[client]
 
-if (!local) {
-    if (process.env.INSTANCE_CONNECTION_NAME && process.env.NODE_ENV === 'production') {
-        config.host = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
-    }
+if (production) {
+    config.host = `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`;
 }
 
 const knex = Knex({
     client: client,
     connection: config,
-    debug: true
 });
 
 
@@ -42,7 +38,6 @@ const knex = Knex({
 var validateUser = (userid) => knex('users').where('userid', userid)
 
 var addUser = (userid) => knex('users').insert({userid: userid}).then(() => userid)
-
 
 var insertDefaultWallets = (userid) => {
     console.log(userid)

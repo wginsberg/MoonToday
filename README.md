@@ -9,19 +9,16 @@ MoonToday is a tool for managing your cryptocurrency asset portfolio.
 
 ## Quickstart
 
-Visit the [live instance](http://moontoday) or follow the instructions below to spin up an instance.
+Visit the [live instance](https://moontoday) or follow the instructions below to spin up an instance.
 
 1) Install dependencies
 `npm install`
 
-2) Initialize database
-`node init.js`
+2) Start the server
+`npm start`
 
-3) Start the server
-`node server.js`
-
-4) Navigate to 
-`localhost:3000`
+3) Navigate to 
+`localhost:8080`
 
 ## Features
 

@@ -4,12 +4,10 @@ Have a valid App Engine Project and loud SQL instance.
 
 Have the Cloud SQL proxy present.
 
-Copy `environ.template` to `environ` and add correct password, user, database, etc.
-
-Initialize environment variables:
-
-```source environ```
+Edit app.standard.yaml to have add correct password, user, database, etc.
 
 Start the proxy:
-```./sql_proxy.sh```
+```./cloud_sql_proxy -instances=$INSTANCE_CONNECTION_NAME```
 
+Start the server with extra flag:
+```npm start -- --cloud-sql```
